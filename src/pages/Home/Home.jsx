@@ -6,7 +6,7 @@ import NavbarComponent from '../../components/Navbar/NavbarComponent'
 const Home = () => {
   return (
     <div>
-        <NavbarComponent/>
+        {/* <NavbarComponent/> */}
         <CarouselComponent/>
         <Footer/>
     </div>

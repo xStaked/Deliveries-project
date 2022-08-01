@@ -1,0 +1,43 @@
+@import "../../styles/variables";
+.container-footer {
+    background-color: $background;
+    color: #fff;
+    height: 130px;
+}
+
+.icon-ig {
+  width: 2.5rem;
+  height: 2.5rem;
+  //   color: rgb(154, 33, 211);
+  color: #e2dbdb;
+  border-radius: 0.375rem;
+  //   background-color: #;
+  background: #d6249f;
+  background: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.icon-li {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #e2dbdb;
+  background-color: #0077b5;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 5px;
+}
+
+.icon-fb {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: #e2dbdb;
+    background-color: #0077b5;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 3px;
+}
