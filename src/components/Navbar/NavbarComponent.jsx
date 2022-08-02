@@ -12,12 +12,18 @@ const NavbarComponent = ({ children }) => {
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Inicio</Navbar.Brand>
+          <Navbar.Brand>
+            <Link to="/" className="link">Incio</Link>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Link to="nosotros">Nosotros</Link>
-              <Nav.Link href={"about"}>Contactanos</Nav.Link>
+              <Nav.Link>
+                <Link to="nosotros" className="link">Nosotros</Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link to={"contacto"} className="link">Contactanos</Link> 
+              </Nav.Link>
             </Nav>
             {/* <Nav>
             <Nav.Link>

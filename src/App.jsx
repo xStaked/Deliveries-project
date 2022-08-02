@@ -2,8 +2,9 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import Home from "./pages/Home/Home";
 import { Routes, Route } from "react-router-dom";
-import About from "./pages/About";
+import About from "./pages/about/About";
 import NavbarComponent from "./components/Navbar/NavbarComponent";
+import Contact from "./pages/contact/Contact";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="nosotros" exact element={<About />} />
+            <Route path="/contacto" exact element={<Contact/>} />
           </Routes>
         </NavbarComponent>
       </Row>
