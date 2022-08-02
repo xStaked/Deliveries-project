@@ -9,12 +9,12 @@ const App = () => {
   return (
     <>
       <Row xxl={12} xl={12}>
-        {/* <NavbarComponent> */}
+        <NavbarComponent>
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="nosotros" exact element={<About />} />
           </Routes>
-        {/* </NavbarComponent> */}
+        </NavbarComponent>
       </Row>
     </>
   );

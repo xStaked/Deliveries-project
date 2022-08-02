@@ -6,7 +6,7 @@ import NavbarComponent from '../../components/Navbar/NavbarComponent'
 const Home = () => {
   return (
     <div style={{backgroundColor:"#1C1A20", height:"100vh"}}>
-        <NavbarComponent/>
+        {/* <NavbarComponent/> */}
         <CarouselComponent/>
         {/* <Footer/> */}
     </div>
