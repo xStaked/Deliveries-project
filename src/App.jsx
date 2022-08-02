@@ -8,14 +8,14 @@ import NavbarComponent from "./components/Navbar/NavbarComponent";
 const App = () => {
   return (
     <>
-      <NavbarComponent>
-        <Row xxl={12} xl={12}>
+      <Row xxl={12} xl={12}>
+        {/* <NavbarComponent> */}
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="nosotros" exact element={<About />} />
           </Routes>
-        </Row>
-      </NavbarComponent>
+        {/* </NavbarComponent> */}
+      </Row>
     </>
   );
 };

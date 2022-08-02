@@ -5,10 +5,10 @@ import NavbarComponent from '../../components/Navbar/NavbarComponent'
 
 const Home = () => {
   return (
-    <div>
-        {/* <NavbarComponent/> */}
+    <div style={{backgroundColor:"#1C1A20", height:"100vh"}}>
+        <NavbarComponent/>
         <CarouselComponent/>
-        <Footer/>
+        {/* <Footer/> */}
     </div>
   )
 }
