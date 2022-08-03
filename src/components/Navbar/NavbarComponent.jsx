@@ -13,16 +13,22 @@ const NavbarComponent = ({ children }) => {
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
           <Navbar.Brand>
-            <Link to="/" className="link">Incio</Link>
+            <Link to="/" className="link">
+              Incio
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link>
-                <Link to="nosotros" className="link">Nosotros</Link>
+                <Link to="nosotros" className="link">
+                  Nosotros
+                </Link>
               </Nav.Link>
               <Nav.Link>
-                <Link to={"contacto"} className="link">Contactanos</Link> 
+                <Link to={"contacto"} className="link">
+                  Contactanos
+                </Link>
               </Nav.Link>
             </Nav>
             {/* <Nav>
@@ -36,7 +42,9 @@ const NavbarComponent = ({ children }) => {
                 <Nav.Link href="#deets" className="login text-center mx-2">
                   {" "}
                   <BsFillArrowRightCircleFill className="login-icon mx-1" />{" "}
-                  <span className="text-login">Login</span>
+                  <Link to="login" className="link">
+                    <span className="text-login">Login</span>
+                  </Link>
                 </Nav.Link>
                 <Nav.Link
                   eventKey={2}
