@@ -36,10 +36,11 @@ const NavbarComponent = ({ children }) => {
             {" "}
             <img src="" alt="logo" />{" "}
             </Nav.Link>
+            
           </Nav> */}
             <Nav className="d-flex flex-column justify-content-center align-items-center">
               <Nav>
-                <Nav.Link href="#deets" className="login text-center mx-2">
+                <Nav.Link className="login text-center mx-2">
                   {" "}
                   <BsFillArrowRightCircleFill className="login-icon mx-1" />{" "}
                   <Link to="login" className="link">
@@ -58,7 +59,6 @@ const NavbarComponent = ({ children }) => {
               <Nav>
                 <Nav.Link
                   eventKey={2}
-                  href="#memes"
                   className="shipping my-2 text-center"
                 >
                   <TbTruckDelivery className="shipping-icon" />
