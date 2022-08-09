@@ -38,7 +38,6 @@ const Login = () => {
     Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
   };
   const login = () => {
-    //const data = { email_user: email, password_user: password };
     const data = new FormData();
     data.append('email_user' ,email);
     data.append('password_user' ,password);
