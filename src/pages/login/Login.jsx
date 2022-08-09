@@ -18,49 +18,38 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const endPoint = "https://api-rest-full-deliveries.herokuapp.com/users?login=true&suffix=use"
+  
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    login();
+  };
+  const endPoint =
+    "https://api-rest-full-deliveries.herokuapp.com/users?login=true&suffix=use";
 
   const headers = {
     Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
   };
-
-  // User Login info
-
-  // const onChange = (e) => {
-  //   setData({ ...data, [e.target.name]: e.target.value });
-  // };
-
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  }
-
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    login( );
+  const login = () => {
+    //const data = { email_user: email, password_user: password };
+    const data = new FormData();
+    data.append('email_user' ,email);
+    data.append('password_user' ,password);
+    axios
+      .post(endPoint, data, {headers})
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch(console.err);
   };
 
-  const login = () => {
-    axios
-      .post(endPoint, {
-        email_user: email,
-        password_user: password,
-      }, { headers })
-      .then((res) => {
-        console.log(res.data)
-      }).catch((err) => {
-        // setErrorMessages(err.response.data.message);
-        console.log(err)
-      }
-      );
-  }
-
-
-
- 
   // Generate JSX code for error message
   const renderErrorMessage = (name) =>
     name === errorMessages.name && (
