@@ -10,13 +10,25 @@ const Login = () => {
   const [errorMessages, setErrorMessages] = useState("");
   const [auth, setAuth] = useState({});
   const [succes, setSucces] = useState(false);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  // const [data, setData] = useState({
+  //   email_user: "",
+  //   password_user: "",
+  // });
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const endPoint = "https://api-rest-full-deliveries.herokuapp.com/users?login=true&suffix=use"
+
+  const headers = {
+    Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
+  };
 
   // User Login info
-  useEffect(() => {
-    setErrorMessages("");
-  },[email, password]);
+
+  // const onChange = (e) => {
+  //   setData({ ...data, [e.target.name]: e.target.value });
+  // };
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -28,56 +40,27 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // try {
-      // const response = await axios.post("https://api-rest-full-deliveries.herokuapp.com/users?login=true&suffix=use",
-      // JSON.stringify({email_user: email, password_user: password}), {
-      //   headers: { "Content-Type": "application/json" },
-      //   withCredentials: true
-      // }
-      // );
-      // console.log(JSON.stringify( response?.data ));
-      // // const accessToken = response?.data?.token_user;
-      // setAuth({ email, password, accessToken });
-      // setSucces(true);
-      const headers = { 
-        'Authorization': 'Bearer my-token',
-        'My-Custom-Header': 'foobar'
-    };
-      axios.post("https://api-rest-full-deliveries.herokuapp.com/users?login=true&suffix=use",{
-        email, password
-      })
-      .then(response => {
-        console.log(response.data);
-        // setAuth({ email, password, accessToken: response.data.token_user });
-        // setSucces(true);
-      })
-      .catch (error => {
-        console.log(error);
-        // setErrorMessages(error.response.data.message);
-      })
-    // }
-    // catch (error) {
-    
-    //   if(error.response.status === 401) {
-    //     setErrorMessages({
-    //       email: "Email or password is incorrect",
-    //     });
-    //   }
-
-    //   if(!error?.response) {
-    //     setErrorMessages("No server response")
-    //   }
-
-    // }
-  }
-
-  const errors = {
-    uname: "invalid username",
-    pass: "invalid password",
+    login( );
   };
 
+  const login = () => {
+    axios
+      .post(endPoint, {
+        email_user: email,
+        password_user: password,
+      }, { headers })
+      .then((res) => {
+        console.log(res.data)
+      }).catch((err) => {
+        // setErrorMessages(err.response.data.message);
+        console.log(err)
+      }
+      );
+  }
 
+
+
+ 
   // Generate JSX code for error message
   const renderErrorMessage = (name) =>
     name === errorMessages.name && (
@@ -99,6 +82,7 @@ const Login = () => {
           type="text"
           placeholder="Nombre de Usuario"
           className="form-control mb-3"
+          name="email_user"
           required
           onChange={onChangeEmail}
         />
@@ -108,6 +92,7 @@ const Login = () => {
           placeholder="Contraseña"
           className="form-control mb-3"
           required
+          name="password_user"
           onChange={onChangePassword}
         />
 
