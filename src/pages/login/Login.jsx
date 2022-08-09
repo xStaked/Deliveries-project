@@ -10,11 +10,6 @@ const Login = () => {
   const [errorMessages, setErrorMessages] = useState("");
   const [auth, setAuth] = useState({});
   const [succes, setSucces] = useState(false);
-  // const [data, setData] = useState({
-  //   email_user: "",
-  //   password_user: "",
-  // });
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,7 +21,6 @@ const Login = () => {
   const onChangePassword = (e) => {
     setPassword(e.target.value);
   };
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     login();
