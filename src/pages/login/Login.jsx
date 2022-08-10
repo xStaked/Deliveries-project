@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import loginImg from "../../assets/loginIMG.png";
-import vector from "../../assets/vector 3.png";
+import { Link } from "react-router-dom";
 import axios from "axios";
 // Styles
 import "./Login.Styles.scss";
 
 const Login = () => {
   const [errorMessages, setErrorMessages] = useState("");
-  const [auth, setAuth] = useState({});
   const [succes, setSucces] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
   };
-  
+
   const onChangePassword = (e) => {
     setPassword(e.target.value);
   };
@@ -33,12 +31,13 @@ const Login = () => {
   };
   const login = () => {
     const data = new FormData();
-    data.append('email_user' ,email);
-    data.append('password_user' ,password);
+    data.append("email_user", email);
+    data.append("password_user", password);
     axios
-      .post(endPoint, data, {headers})
+      .post(endPoint, data, { headers })
       .then((res) => {
         console.log(res.data);
+        setSucces(true);
       })
       .catch(console.err);
   };
@@ -52,7 +51,6 @@ const Login = () => {
   // JSX code for login form
   const renderForm = (
     <Col
-      xl={5}
       className="d-flex flex-column justify-content-center align-items-center"
     >
       <h3 className="title-login">Login</h3>
@@ -62,7 +60,7 @@ const Login = () => {
       >
         <input
           type="text"
-          placeholder="Nombre de Usuario"
+          placeholder="Correo electronico"
           className="form-control mb-3"
           name="email_user"
           required
@@ -84,28 +82,27 @@ const Login = () => {
           className="form-control mb-3 login-button"
         />
       </form>
-      <p>¿No tienes cuenta? </p>
-      {/* <Link to="register">Register</Link> */}
+     <div className="d-flex flex-row justify-content-center text-contain">
+     <p className="mx-3 qa">¿No tienes cuenta? </p>
+      <Link to="register" className="text-center text-decoration-none">
+        <span className="register-log">Register</span>
+      </Link>
+     </div>
     </Col>
   );
 
   return (
-    <div className="app">
-      <div className="login-form">
-        <div className="title">Sign In</div>
-      </div>
+    <div className="login-container">
       <Container>
         <Row>
-          <Col xl={5}>
-            <img src={loginImg} alt="loginImg" />
+          <Col xl={6} className="d-flex justify-content-center align-items-center">
+            <img src={loginImg} alt="loginImg" className="loginImg"/>
           </Col>
-          <Col xl={1}>
-            <img src={vector} alt="vector" />
-          </Col>
+          <Col xl={6} className="d-flex flex-row justify-content-around align-items-center">
           {succes ? <div>User is successfully logged in</div> : renderForm}
+          </Col>
         </Row>
       </Container>
-      ;
     </div>
   );
 };

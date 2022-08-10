@@ -1,10 +1,33 @@
 @import "../../styles/variables";
 
+.login-container {
+  background-color: $background;
+  height: 100vh;
+}
+
+.qa {
+  color: #898989;
+}
+
+.register-log {
+  color: $blue;
+}
+
 .title-login {
-    color: $blue;
+  color: $blue;
 }
 
 .login-button {
-    color: #fff;
-    background-color: $blue;
+  color: #fff;
+  background-color: $blue;
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    height: 100vh;
+  }
+
+  .loginImg {
+    width: 100vw;
+  }
 }

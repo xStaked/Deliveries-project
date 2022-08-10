@@ -48,17 +48,16 @@ const NavbarComponent = ({ children }) => {
                   </Link>
                 </Nav.Link>
                 <Nav.Link
-                  eventKey={2}
-                  href="#memes"
                   className="register text-center"
                 >
                   <BsFillArrowLeftCircleFill className="register-icon mx-1" />
-                  <span className="register-text">Register</span>
+                 <Link to="register">
+                 <span className="register-text">Register</span>
+                 </Link>
                 </Nav.Link>
               </Nav>
               <Nav>
                 <Nav.Link
-                  eventKey={2}
                   className="shipping my-2 text-center"
                 >
                   <TbTruckDelivery className="shipping-icon" />

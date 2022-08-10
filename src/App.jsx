@@ -6,6 +6,7 @@ import About from "./pages/about/About";
 import NavbarComponent from "./components/Navbar/NavbarComponent";
 import Contact from "./pages/contact/Contact";
 import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="nosotros" exact element={<About />} />
             <Route path="contacto" exact element={<Contact/>} />
             <Route path="login" exact element={<Login />} />
+            <Route path="register" exact element={<Register />} />
           </Routes>
         </NavbarComponent>
       </Row>
