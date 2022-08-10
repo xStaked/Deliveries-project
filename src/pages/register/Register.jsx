@@ -5,6 +5,33 @@ import { Link } from "react-router-dom";
 
 import "./register.Styles.scss";
 const Register = () => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+
+   const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+  }
+  const handleChangePasswordConfirm = (e) => {
+    setPasswordConfirm(e.target.value);
+  }
+
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+   }
+
+   const register = () => {
+
+   }
+
+
   return (
     <div className="container-register">
       <Container>
@@ -34,7 +61,7 @@ const RenderRegister = () => {
     <Col className="d-flex flex-column justify-content-center align-items-center">
       <h3 className="title-login">Register</h3>
       <form
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         className="d-flex flex-column justify-content-center align-items-center"
       >
         <input
@@ -43,7 +70,7 @@ const RenderRegister = () => {
           className="form-control mb-3"
           name="email_user"
           required
-          // onChange={onChangeEmail}
+          onChange={handleChangeEmail}
         />
 
         <input
@@ -52,7 +79,7 @@ const RenderRegister = () => {
           className="form-control mb-3"
           required
           name="password_user"
-          // onChange={onChangePassword}
+          onChange={handleChangePassword}
         />
 
         <input
@@ -61,7 +88,7 @@ const RenderRegister = () => {
           className="form-control mb-3"
           required
           name="password_user"
-          // onChange={onChangePassword}
+          onChange={handleChangePasswordConfirm}
         />
 
         <input
