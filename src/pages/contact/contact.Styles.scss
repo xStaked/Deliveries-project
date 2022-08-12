@@ -1,0 +1,100 @@
+@import "../../styles/variables.scss";
+
+.contact-container {
+    background-color: $background;
+}
+
+.contact-title {
+    color: $blue;
+    font-size: 70px
+}
+
+.addres-img {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.img1 {
+    margin-top: -110px;
+}
+
+.location {
+    color: #fff;
+}
+
+.tel {
+    color: $gray;
+}
+
+.horarios {
+    color: #fff;
+}
+
+.horarios-1 {
+    color: $gray;
+}
+
+.horarios-2 {
+    color: $gray;
+}
+
+.redes-title {
+    color: $blue;
+    font-size: 70px;
+}
+a {
+    text-decoration: none;
+    color: #fff !important;
+}
+.icon {
+    width: 3rem;
+    height: 3rem;
+    margin-right: 3rem;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+
+    .addres-img {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 2rem;
+    }
+
+    .img1 {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .img2 {
+        width: 300px
+    }
+
+    .icon {
+        margin-bottom: 2rem;
+    }
+
+    .contact-title {
+        font-size: 50px;
+    }
+    .redes-title {
+        font-size: 50px;
+        text-align: center;
+    }
+    .horarios {
+        font-size: 30px;
+    }
+    .horarios-1 {
+        font-size: 30px;
+    }
+    .horarios-2 {
+        font-size: 30px;
+    }
+    .location {
+        font-size: 30px;
+    }
+    .tel {
+        font-size: 30px;
+    }
+}
