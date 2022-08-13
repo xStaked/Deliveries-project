@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 // Styles
 import "./Login.Styles.scss";
+import AlertComponent from "../../components/Carousel/AlertComponent";
 
 const Login = () => {
   const [errorMessages, setErrorMessages] = useState("");
@@ -36,8 +37,9 @@ const Login = () => {
     axios
       .post(endPoint, data, { headers })
       .then((res) => {
-        console.log(res.data);
         setSucces(true);
+        localStorage.setItem("token", res.data.detalle[0].token_user);
+        localStorage.setItem('user', res.data)
       })
       .catch(console.err);
   };
@@ -99,7 +101,7 @@ const Login = () => {
             <img src={loginImg} alt="loginImg" className="loginImg"/>
           </Col>
           <Col xl={6} className="d-flex flex-row justify-content-around align-items-center">
-          {succes ? <div>User is successfully logged in</div> : renderForm}
+          {succes ? <AlertComponent/> : renderForm}
           </Col>
         </Row>
       </Container>
