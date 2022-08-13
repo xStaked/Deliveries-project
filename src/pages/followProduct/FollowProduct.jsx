@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
 const FollowProduct = () => {
-  return (
-    <div>FollowProduct</div>
-  )
-}
+  const token = localStorage.getItem("token");
 
-export default FollowProduct
+  return <div>{token ? <h1>Seguir tu producto</h1> : <h1>Login</h1>}</div>;
+};
+
+export default FollowProduct;

@@ -13,6 +13,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const token = localStorage.getItem("token");
+
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -39,7 +41,7 @@ const Login = () => {
       .then((res) => {
         setSucces(true);
         localStorage.setItem("token", res.data.detalle[0].token_user);
-        localStorage.setItem('user', res.data)
+        localStorage.setItem("user", JSON.stringify(res.data.detalle[0]));
       })
       .catch(console.err);
   };
@@ -52,56 +54,66 @@ const Login = () => {
 
   // JSX code for login form
   const renderForm = (
-    <Col
-      className="d-flex flex-column justify-content-center align-items-center"
-    >
-      <h3 className="title-login">Login</h3>
-      <form
-        onSubmit={handleSubmit}
-        className="d-flex flex-column justify-content-center align-items-center"
-      >
-        <input
-          type="text"
-          placeholder="Correo electronico"
-          className="form-control mb-3"
-          name="email_user"
-          required
-          onChange={onChangeEmail}
-        />
+    <>
+      {!token ? (
+        <Col className="d-flex flex-column justify-content-center align-items-center">
+          <h3 className="title-login">Login</h3>
+          <form
+            onSubmit={handleSubmit}
+            className="d-flex flex-column justify-content-center align-items-center"
+          >
+            <input
+              type="text"
+              placeholder="Correo electronico"
+              className="form-control mb-3"
+              name="email_user"
+              required
+              onChange={onChangeEmail}
+            />
 
-        <input
-          type="password"
-          placeholder="Contraseña"
-          className="form-control mb-3"
-          required
-          name="password_user"
-          onChange={onChangePassword}
-        />
+            <input
+              type="password"
+              placeholder="Contraseña"
+              className="form-control mb-3"
+              required
+              name="password_user"
+              onChange={onChangePassword}
+            />
 
-        <input
-          type="submit"
-          value="Iniciar sesión"
-          className="form-control mb-3 login-button"
-        />
-      </form>
-     <div className="d-flex flex-row justify-content-center text-contain">
-     <p className="mx-3 qa">¿No tienes cuenta? </p>
-      <Link to="register" className="text-center text-decoration-none">
-        <span className="register-log">Register</span>
-      </Link>
-     </div>
-    </Col>
+            <input
+              type="submit"
+              value="Iniciar sesión"
+              className="form-control mb-3 login-button"
+            />
+          </form>
+          <div className="d-flex flex-row justify-content-center text-contain">
+            <p className="mx-3 qa">¿No tienes cuenta? </p>
+            <Link to="register" className="text-center text-decoration-none">
+              <span className="register-log">Register</span>
+            </Link>
+          </div>
+        </Col>
+      ) : (
+        <AlertComponent />
+      )}
+    </>
   );
 
   return (
     <div className="login-container">
       <Container>
         <Row>
-          <Col xl={6} className="d-flex justify-content-center align-items-center">
-            <img src={loginImg} alt="loginImg" className="loginImg"/>
+          <Col
+            xl={6}
+            className="d-flex justify-content-center align-items-center"
+          >
+            <img src={loginImg} alt="loginImg" className="loginImg" />
           </Col>
-          <Col xl={6} className="d-flex flex-row justify-content-around align-items-center">
-          {succes ? <AlertComponent/> : renderForm}
+          <Col
+            xl={6}
+            className="d-flex flex-row justify-content-around align-items-center"
+          >
+            {succes ? <AlertComponent /> : renderForm}
           </Col>
         </Row>
       </Container>
