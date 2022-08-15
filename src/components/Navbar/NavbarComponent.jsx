@@ -5,11 +5,23 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { TbTruckDelivery } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { FiLogOut } from "react-icons/fi";
 // Styles
 import "./Navbar.Styles.scss";
+import { useEffect } from "react";
 
 const NavbarComponent = ({ children }) => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(token) {
+      <NavLogin>{children}</NavLogin>
+    }else{
+      <NavRegister>{children}</NavRegister>
+    }
+  })
+
   const token = localStorage.getItem("token");
   return (
     <>
@@ -25,10 +37,9 @@ const NavbarComponent = ({ children }) => {
 export default NavbarComponent;
 
 const NavLogin = ({ children }) => {
-
   const removeToken = () => {
     localStorage.removeItem("token");
-  }
+  };
 
   return (
     <>
@@ -68,7 +79,12 @@ const NavLogin = ({ children }) => {
                 </Link>
               </Nav>
               <Nav>
-                <Link to="home" className="logout my-2 text-center" onClick={removeToken}>
+                <Link
+                  to="home"
+                  className="logout my-2 text-center"
+                  onClick={removeToken}
+                >
+                  <FiLogOut className="logout-icon" />
                   <span className=" text-center">Salir</span>
                 </Link>
               </Nav>
@@ -84,6 +100,8 @@ const NavLogin = ({ children }) => {
 const NavRegister = ({ children }) => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+
+
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -131,16 +149,10 @@ const NavRegister = ({ children }) => {
                 </Nav.Link>
               </Nav>
               <Nav>
-                {/* {
-                  token ? (
-                    <Link to="followProduct" className="shipping my-2 text-center">
+                <Link to="followProduct" className="shipping my-2 text-center">
                   <TbTruckDelivery className="shipping-icon" />
                   <span className="shipping-text mx-1">Seguir tu producto</span>
                 </Link>
-                  ) : (
-                    navigate("login")
-                  )
-                } */}
               </Nav>
             </Nav>
           </Navbar.Collapse>

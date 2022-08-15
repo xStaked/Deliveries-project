@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import Home from "./pages/Home/Home";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import About from "./pages/about/About";
 import NavbarComponent from "./components/Navbar/NavbarComponent";
 import Contact from "./pages/contact/Contact";
@@ -10,6 +10,9 @@ import Register from "./pages/register/Register";
 import FollowProduct from "./pages/followProduct/FollowProduct";
 
 const App = () => {
+
+  const token = localStorage.getItem("token");
+
   return (
     <>
       <Row xxl={12} xl={12}>
@@ -20,7 +23,7 @@ const App = () => {
             <Route path="contacto" exact element={<Contact />} />
             <Route path="login" exact element={<Login />} />
             <Route path="register" exact element={<Register />} />
-            <Route path="/followProduct" exact element={<FollowProduct />} />
+            <Route path="/followProduct"  element={ !token ? <Navigate replace to="/login"/> : <FollowProduct/> } />
           </Routes>
         </NavbarComponent>
       </Row>

@@ -1,0 +1,32 @@
+.card-status {
+    width: 80vw;
+    height: 200px;
+    background-color: #2C2832;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .title-status {
+        color: #fff;
+        font-size: 1.5rem;
+    }
+
+    .icon-status {
+        color: $blue;
+        font-size: 2.3rem;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-status {
+        width: 90vw;
+        height: 65vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+}

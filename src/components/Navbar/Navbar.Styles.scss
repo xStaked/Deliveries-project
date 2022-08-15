@@ -38,10 +38,12 @@
     border-radius: 10px;
     > .shipping-text {
         color: #fff;
+        text-decoration: none !important;
     }
 
     > .shipping-icon {
         color: #fff;
+        font-size: 1.3rem;
     }
 }
 
@@ -61,4 +63,9 @@
     justify-content: center;
     align-items: center;
     text-decoration: none;
+}
+
+.logout-icon {
+    margin-right: 10px;
+    font-size: 1.3rem;
 }
