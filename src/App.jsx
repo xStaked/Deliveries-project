@@ -8,6 +8,7 @@ import Contact from "./pages/contact/Contact";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import FollowProduct from "./pages/followProduct/FollowProduct";
+import BackOffice from "./pages/BackOffice/Admin";
 
 const App = () => {
 
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="contacto" exact element={<Contact />} />
             <Route path="login" exact element={<Login />} />
             <Route path="register" exact element={<Register />} />
+            <Route path="/backoffice" exact element={ <BackOffice/> } />
             <Route path="/followProduct"  element={ !token ? <Navigate replace to="/login"/> : <FollowProduct/> } />
           </Routes>
         </NavbarComponent>
