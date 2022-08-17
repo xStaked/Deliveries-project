@@ -13,22 +13,22 @@ const FollowStatus = ({ deliveryDate, packagingDate, translateDate, shippingDate
       <Col className="d-flex flex-column justify-content-center align-items-center">
         <FaHouseUser className="icon-status"/>
         <h3 className="title-status" >Fecha del pedido</h3>
-        <span> {deliveryDate} </span>
+        <span className='text-dev'> {deliveryDate} </span>
       </Col>
       <Col  className="d-flex flex-column justify-content-center align-items-center">
         <GiBoxUnpacking  className="icon-status"/>
         <h3 className="title-status">Tiempo de empacado</h3>
-        <span> { packagingDate } </span>
+        <span className='text-dev'> { packagingDate } </span>
       </Col>
       <Col  className="d-flex flex-column justify-content-center align-items-center">
         <TbTruckDelivery className="icon-status"/>
         <h3 className="title-status">Tiempo de translado</h3>
-        <span> { translateDate } </span>
+        <span className='text-dev'> { translateDate } </span>
       </Col>
       <Col  className="d-flex flex-column justify-content-center align-items-center">
         <GiHouse  className="icon-status"/>
         <h3 className="title-status">Tiempo de entrega</h3>
-        <span> { shippingDate } </span>
+        <span className='text-dev'> { shippingDate } </span>
       </Col>
     </div>
   </Container>
