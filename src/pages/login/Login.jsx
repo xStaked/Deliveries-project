@@ -6,6 +6,7 @@ import axios from "axios";
 // Styles
 import "./Login.Styles.scss";
 import AlertComponent from "../../components/Carousel/AlertComponent";
+import Alerts from "../../components/Alerts/Alerts";
 
 const Login = () => {
   const [errorMessages, setErrorMessages] = useState("");
@@ -94,7 +95,7 @@ const Login = () => {
           </div>
         </Col>
       ) : (
-        <AlertComponent />
+        <Alerts type="success" />
       )}
     </>
   );
@@ -113,7 +114,7 @@ const Login = () => {
             xl={6}
             className="d-flex flex-row justify-content-around align-items-center"
           >
-            {succes ? <AlertComponent /> : renderForm}
+            {succes ? <Alerts type="success" /> : renderForm}
           </Col>
         </Row>
       </Container>
