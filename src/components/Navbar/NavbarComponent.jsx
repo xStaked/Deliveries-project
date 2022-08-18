@@ -3,30 +3,40 @@ import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { TbTruckDelivery } from "react-icons/tb";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 // Styles
 import "./Navbar.Styles.scss";
 import { useEffect } from "react";
+import { useState } from "react";
 
 const NavbarComponent = ({ children }) => {
 
+  const [token, setToken] = useState(null);
+
   const navigate = useNavigate();
+  const removeToken = async () => {
+   await localStorage.removeItem("token");
+   await  localStorage.removeItem("user");
+    navigate("/", { replace: true });
+  };
 
   useEffect(() => {
-    if(token) {
-      <NavLogin>{children}</NavLogin>
-    }else{
-      <NavRegister>{children}</NavRegister>
-    }
-  })
+    const getToken = async () => {
+     await setToken(localStorage.getItem("token"));
+      if (token !== undefined || token !== null) {
+        return token;
+      } else {
+        return setToken(null);
+      }
+    };
+    getToken();
+  }, [token]);
 
-  const token = localStorage.getItem("token");
   return (
     <>
       {token ? (
-        <NavLogin children={children} />
+        <NavLogin children={children} removeToken={removeToken} />
       ) : (
         <NavRegister children={children} />
       )}
@@ -36,11 +46,7 @@ const NavbarComponent = ({ children }) => {
 
 export default NavbarComponent;
 
-const NavLogin = ({ children }) => {
-  const removeToken = () => {
-    localStorage.removeItem("token");
-  };
-
+const NavLogin = ({ children, removeToken }) => {
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -98,10 +104,6 @@ const NavLogin = ({ children }) => {
 };
 
 const NavRegister = ({ children }) => {
-  const navigate = useNavigate();
-  const token = localStorage.getItem("token");
-
-
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
