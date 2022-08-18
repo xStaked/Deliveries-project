@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 // Styles
 import "./Login.Styles.scss";
-import AlertComponent from "../../components/Carousel/AlertComponent";
 import Alerts from "../../components/Alerts/Alerts";
 
 const Login = () => {

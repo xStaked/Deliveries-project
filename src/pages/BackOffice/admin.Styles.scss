@@ -1,0 +1,16 @@
+@import "../../styles/variables";
+
+.container-backoffice {
+    background-color: $background;
+    height: 100vh;
+    .title {
+        color: $blue;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .label {
+        color: $blue;
+        margin-top: 1rem;
+    }
+}
