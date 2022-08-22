@@ -12,9 +12,9 @@ const Login = () => {
   const [succes, setSucces] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [ response, setResponse ] = useState();
   const token = localStorage.getItem("token");
-
+console.log(response)
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -40,17 +40,19 @@ const Login = () => {
       .post(endPoint, data, { headers })
       .then((res) => {
         setSucces(true);
-        localStorage.setItem("token", res.data.detalle[0].token_user);
-        localStorage.setItem("user", JSON.stringify(res.data.detalle[0]));
+        // localStorage.setItem("token", res.data.detalle[0].token_user);
+        // localStorage.setItem("id", res.data.detalle[0].id_user);
+        setResponse(res.data);
       })
       .catch(console.err);
   };
 
-  // Generate JSX code for error message
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
-    );
+  useEffect(() => {
+    if (response) {
+      localStorage.setItem("token", response.detalle[0].token_user);
+      localStorage.setItem("id", response.detalle[0].id_user);
+    }
+  }, [response]);
 
   // JSX code for login form
   const renderForm = (

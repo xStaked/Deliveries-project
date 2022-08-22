@@ -93,70 +93,40 @@ function MyVerticallyCenteredModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          Editar estado de la orden
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
+        <h4></h4>
+        <Form.Group>
+          <Form.Label>Fecha de la orden</Form.Label>
+          <Form.Control type="date" />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Tiempo de empacado</Form.Label>
+          <Form.Control type="date" />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Tiempo de translado</Form.Label>
+          <Form.Control type="date" />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Tiempo de entrega</Form.Label>
+          <Form.Control type="date" />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Entregado</Form.Label>
+          <Form.Control as="select">
+            <option>Si</option>
+            <option>No</option>
+          </Form.Control>
+        </Form.Group>
       </Modal.Body>
       <Modal.Footer>
+        <Button variant="danger" onClick={props.onHide}>Eliminar</Button>
         <Button onClick={props.onHide}>Close</Button>
+
       </Modal.Footer>
     </Modal>
   );
-}
-
-{
-  /* <Row> */
-}
-
-{
-  /* </Row> */
-}
-{
-  /* <Row>
-        <Accordion defaultActiveKey="0" flush>
-          <Accordion.Item eventKey="0">
-            <Accordion.Header>Producto 1</Accordion.Header>
-            <Accordion.Body>
-              <Form.Group className="mb-3" controlId="idOrder">
-                <Form.Label>Id del producto o correo</Form.Label>
-                <Form.Control type="text" placeholder="ID del producto" />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Campo1</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
-              </Form.Group>
-
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Campo2</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
-              </Form.Group>
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item eventKey="1">
-            <Accordion.Header>Produco 2</Accordion.Header>
-            <Accordion.Body>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Campo1</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Campo1</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
-              </Form.Group>
-
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Campo2</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
-              </Form.Group>
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-      </Row> */
 }

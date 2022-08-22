@@ -11,7 +11,6 @@ import FollowProduct from "./pages/followProduct/FollowProduct";
 import BackOffice from "./pages/BackOffice/Admin";
 
 const App = () => {
-
   const token = localStorage.getItem("token");
 
   return (
@@ -20,10 +19,10 @@ const App = () => {
         <NavbarComponent>
           <Routes>
             <Route path="/" exact element={<Home />} />
-            <Route path="nosotros" exact element={<About />} />
-            <Route path="contacto" exact element={<Contact />} />
-            <Route path="login" exact element={<Login />} />
-            <Route path="register" exact element={<Register />} />
+            <Route path="/nosotros" exact element={<About />} />
+            <Route path="/contacto" exact element={<Contact />} />
+            <Route path="/login" exact element={<Login />} />
+            <Route path="/register" exact element={<Register />} />
             <Route path="/backoffice" exact element={ <BackOffice/> } />
             <Route path="/followProduct"  element={ !token ? <Navigate replace to="/login"/> : <FollowProduct/> } />
           </Routes>
