@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Placeholder } from "react-bootstrap";
 import loginImg from "../../assets/loginIMG.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -8,13 +8,12 @@ import "./Login.Styles.scss";
 import Alerts from "../../components/Alerts/Alerts";
 
 const Login = () => {
-  const [errorMessages, setErrorMessages] = useState("");
   const [succes, setSucces] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [ response, setResponse ] = useState();
   const token = localStorage.getItem("token");
-console.log(response)
+
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -23,6 +22,7 @@ console.log(response)
     setPassword(e.target.value);
   };
   const handleSubmit = async (e) => {
+    // <Placeholder as="p" animation="grow" variant="dark" />;
     e.preventDefault();
     login();
   };
@@ -40,8 +40,6 @@ console.log(response)
       .post(endPoint, data, { headers })
       .then((res) => {
         setSucces(true);
-        // localStorage.setItem("token", res.data.detalle[0].token_user);
-        // localStorage.setItem("id", res.data.detalle[0].id_user);
         setResponse(res.data);
       })
       .catch(console.err);

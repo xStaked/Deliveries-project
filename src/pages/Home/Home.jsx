@@ -7,6 +7,7 @@ const Home = () => {
   return (
     <div style={{backgroundColor:"#1C1A20", height:"100vh"}}>
         <CarouselComponent/>
+        <Footer/>
     </div>
   )
 }

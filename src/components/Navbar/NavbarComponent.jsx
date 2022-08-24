@@ -5,6 +5,7 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { TbTruckDelivery } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
+import logo from "../../assets/logo.png";
 // Styles
 import "./Navbar.Styles.scss";
 import { useEffect } from "react";
@@ -48,13 +49,12 @@ const NavbarComponent = ({ children }) => {
                 </Link>
               </Nav.Link>
             </Nav>
-            {/* <Nav>
-          <Nav.Link>
-          {" "}
-          <img src="" alt="logo" />{" "}
-          </Nav.Link>
-          
-        </Nav> */}
+            <Nav>
+              <Nav.Link>
+                {" "}
+                <img src={'src/assets/output-onlinepngtools.png'} alt="logo" width={200} height={110} />{" "}
+              </Nav.Link>
+            </Nav>
             {token ? (
               <Nav className="d-flex flex-column justify-content-center align-items-center">
                 <Nav>
