@@ -9,6 +9,7 @@ import {
   InputGroup,
   Modal,
 } from "react-bootstrap";
+import axios from "axios";
 
 import "./admin.Styles.scss";
 const BackOffice = () => {
@@ -18,7 +19,26 @@ const BackOffice = () => {
     setProduct(e.target.value);
   };
 
-  console.log(product);
+  const endpoint = "https://api-rest-full-deliveries.herokuapp.com/products";
+
+  const headers = {
+    Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
+  };
+
+  const onDelete = () => {
+    axios
+      .delete(endpoint, { headers })
+      .then((res) => {
+        console.log(res);
+        // setModalShow(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setProduct("");
+      });
+  };
 
   return (
     <Container className="container-backoffice">
@@ -68,10 +88,16 @@ const BackOffice = () => {
                 <Button variant="primary" onClick={() => setModalShow(true)}>
                   Editar
                 </Button>
-                <MyVerticallyCenteredModal
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                />
+                <Row>
+                  <MyVerticallyCenteredModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    className="my-1"
+                  />
+                  <Button variant="danger" className="my-2">
+                    Eliminar
+                  </Button>
+                </Row>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
@@ -123,9 +149,7 @@ function MyVerticallyCenteredModal(props) {
         </Form.Group>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="danger" onClick={props.onHide}>Eliminar</Button>
-        <Button onClick={props.onHide}>Close</Button>
-
+        <Button onClick={props.onHide}>Enviar</Button>
       </Modal.Footer>
     </Modal>
   );

@@ -24,7 +24,7 @@ const App = () => {
             <Route path="/contacto" exact element={<Contact />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/register" exact element={<Register />} />
-            <Route path="/backoffice" exact element={<BackOffice />} />
+            <Route path="/admin" exact element={<BackOffice />} />
             <Route
               path="/followProduct"
               element={
