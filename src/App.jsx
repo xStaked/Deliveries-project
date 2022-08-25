@@ -9,6 +9,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import FollowProduct from "./pages/followProduct/FollowProduct";
 import BackOffice from "./pages/BackOffice/Admin";
+import Error from "./pages/404/Error";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -23,8 +24,14 @@ const App = () => {
             <Route path="/contacto" exact element={<Contact />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/register" exact element={<Register />} />
-            <Route path="/backoffice" exact element={ <BackOffice/> } />
-            <Route path="/followProduct"  element={ !token ? <Navigate replace to="/login"/> : <FollowProduct/> } />
+            <Route path="/backoffice" exact element={<BackOffice />} />
+            <Route
+              path="/followProduct"
+              element={
+                !token ? <Navigate replace to="/login" /> : <FollowProduct />
+              }
+            />
+            <Route path="*" element={<Error />} />
           </Routes>
         </NavbarComponent>
       </Row>

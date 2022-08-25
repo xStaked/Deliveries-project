@@ -49,12 +49,12 @@ const NavbarComponent = ({ children }) => {
                 </Link>
               </Nav.Link>
             </Nav>
-            <Nav>
+            {/* <Nav>
               <Nav.Link>
                 {" "}
                 <img src={'src/assets/output-onlinepngtools.png'} alt="logo" width={200} height={110} />{" "}
               </Nav.Link>
-            </Nav>
+            </Nav> */}
             {token ? (
               <Nav className="d-flex flex-column justify-content-center align-items-center">
                 <Nav>

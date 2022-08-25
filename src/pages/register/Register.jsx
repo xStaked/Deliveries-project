@@ -73,9 +73,9 @@ const Register = () => {
           />
         </form>
         <div className="d-flex flex-row justify-content-center text-contain">
-          <p className="mx-3 qa">¿No tienes cuenta? </p>
-          <Link to="register" className="text-center text-decoration-none">
-            <span className="register-log">Register</span>
+          <p className="mx-3 qa">¿Ya tienes cuenta? </p>
+          <Link to="/login" className="text-center text-decoration-none">
+            <span className="register-log">Login</span>
           </Link>
         </div>
       </Col>
