@@ -9,7 +9,7 @@ import {
   Modal,
 } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
-import AdminOrder from "../../components/AdminOrder/AdminOrder";
+import AdminOrder from "../../components/adminOrder/AdminOrder";
 import axios from "axios";
 
 import "./admin.Styles.scss";
