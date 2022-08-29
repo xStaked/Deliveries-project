@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import signUp from "../../assets/signUp.png";
+import signUp from "../../assets/signup.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./register.Styles.scss";
