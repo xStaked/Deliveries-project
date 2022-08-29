@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import aboutimg from "../../assets/aboutImg.png";
+import aboutimg from "../../assets/aboutimg.png";
 import { Card } from "react-bootstrap";
 
 // Styles
