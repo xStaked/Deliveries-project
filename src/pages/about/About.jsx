@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import aboutImg from "../../assets/aboutImg.png";
+import aboutimg from "../../assets/aboutImg.png";
 import { Card } from "react-bootstrap";
 
 // Styles
@@ -39,7 +39,7 @@ const About = () => {
             className="d-flex justify-content-center align-items-start"
           >
             <img
-              src={aboutImg}
+              src={aboutimg}
               alt="about-img"
               width={585}
               height={715}
