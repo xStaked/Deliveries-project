@@ -5,7 +5,6 @@ import {
   Col,
   Form,
   Button,
-  Accordion,
   InputGroup,
   Modal,
 } from "react-bootstrap";
@@ -16,7 +15,6 @@ import axios from "axios";
 import "./admin.Styles.scss";
 const BackOffice = () => {
   const [email, setEmail] = useState("");
-  const [modalShow, setModalShow] = useState(false);
   const [data, setData] = useState([]);
   const [create, setCreate] = useState(false);
   const [createOrder, setCreateOrder] = useState({});
@@ -37,21 +35,6 @@ const BackOffice = () => {
 
   const headers = {
     Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
-  };
-
-  const onDelete = () => {
-    axios
-      .delete(endpoint, { headers })
-      .then((res) => {
-        console.log(res);
-        // setModalShow(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setProduct("");
-      });
   };
 
   const api = () => {
@@ -87,7 +70,6 @@ const BackOffice = () => {
               show={create}
               onHide={() => setCreate(false)}
               className="my-1"
-              // onChange={handleChange}
               createOrder={createOrder}
               change={handleChange}
             />

@@ -26,10 +26,6 @@ const AdminOrder = ({
     })
   }
    
-
-
-  console.log(data);
-
   return (
     <div className="d-flex justify-content-center align-items-center  my-2">
       <Row className="d-flex flex-column justify-content-center align-items-center"></Row>
