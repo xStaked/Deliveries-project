@@ -13,7 +13,7 @@ import AdminOrder from "../../components/AdminOrder/AdminOrder";
 import axios from "axios";
 
 import "./admin.Styles.scss";
-const BackOffice = () => {
+const Admin = () => {
   const [email, setEmail] = useState("");
   const [data, setData] = useState([]);
   const [create, setCreate] = useState(false);
@@ -44,7 +44,7 @@ const BackOffice = () => {
   };
 
   return (
-    <Container className="container-backoffice">
+    <Container className="container-Admin">
       <Row className="d-flex flex-column justify-content-center align-items-center">
         <Col xl={6}>
           <h2 className="title">Dashboard</h2>
@@ -93,7 +93,7 @@ const BackOffice = () => {
   );
 };
 
-export default BackOffice;
+export default Admin;
 
 function CreateOrder(props) {
   const { change, createOrder } = props;

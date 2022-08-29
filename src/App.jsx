@@ -8,7 +8,7 @@ import Contact from "./pages/contact/Contact";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import FollowProduct from "./pages/followProduct/FollowProduct";
-import BackOffice from "./pages/BackOffice/Admin";
+import Admin from "./pages/BackOffice/Admin";
 import Error from "./pages/404/Error";
 
 const App = () => {
@@ -25,7 +25,7 @@ const App = () => {
             <Route path="/contacto" exact element={<Contact />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/register" exact element={<Register />} />
-            <Route path="/admin" exact element={ <BackOffice /> } />
+            <Route path="/admin" exact element={ <Admin /> } />
             <Route
               path="/followProduct"
               element={
