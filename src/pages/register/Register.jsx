@@ -2,39 +2,57 @@ import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import signUp from "../../assets/signUp.png";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 import "./register.Styles.scss";
 const Register = () => {
+  const RenderRegister = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
+    const handleChangeEmail = (e) => {
+      setEmail(e.target.value);
+    };
 
-   const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  }
+    const handleChangePassword = (e) => {
+      setPassword(e.target.value);
+    };
+    const handleChangePasswordConfirm = (e) => {
+      setPasswordConfirm(e.target.value);
+    };
 
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  }
-  const handleChangePasswordConfirm = (e) => {
-    setPasswordConfirm(e.target.value);
-  }
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      postRegister();
+    };
 
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    console.log(
+      email
+    )
 
-   }
+    const endpoint =
+      "https://api-rest-full-deliveries.herokuapp.com/users?register=true&suffix=user";
 
-   const register = () => {
+    const headers = {
+      Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
+    };
 
-   }
-
-   const RenderRegister = () => {
+    const postRegister = () => {
+      const data = new FormData();
+      data.append("email_user", email);
+      data.append("password_user", password);
+      axios
+        .post(endpoint, data, { headers })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
     return (
       <Col className="d-flex flex-column justify-content-center align-items-center">
-        <h3 className="title-login">Register</h3>
+        <h3 className="title-login">Registro</h3>
         <form
           onSubmit={handleSubmit}
           className="d-flex flex-column justify-content-center align-items-center"
@@ -47,7 +65,7 @@ const Register = () => {
             required
             onChange={handleChangeEmail}
           />
-  
+
           <input
             type="password"
             placeholder="Contraseña"
@@ -56,7 +74,7 @@ const Register = () => {
             name="password_user"
             onChange={handleChangePassword}
           />
-  
+
           <input
             type="password"
             placeholder="Confirmar Contraseña"
@@ -65,11 +83,12 @@ const Register = () => {
             name="password_user"
             onChange={handleChangePasswordConfirm}
           />
-  
+
           <input
             type="submit"
-            value="Iniciar sesión"
+            value="Registrar"
             className="form-control mb-3 login-button"
+            disabled={!(password === passwordConfirm)}
           />
         </form>
         <div className="d-flex flex-row justify-content-center text-contain">
@@ -82,7 +101,6 @@ const Register = () => {
     );
   };
 
-
   return (
     <div className="container-register">
       <Container>
@@ -91,7 +109,7 @@ const Register = () => {
             xl={6}
             className="d-flex justify-content-center align-items-center"
           >
-            <img src={signUp} alt="signUp"  className="singupImg"/>
+            <img src={signUp} alt="signUp" className="singupImg" />
           </Col>
           <Col
             xl={6}
@@ -106,5 +124,3 @@ const Register = () => {
 };
 
 export default Register;
-
-

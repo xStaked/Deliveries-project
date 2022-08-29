@@ -1,0 +1,21 @@
+@import "../../styles/variables";
+
+.card-status {
+    width: 82vw;
+    height: 200px;
+    background-color: #2C2832;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .product-name {
+        font-size: 2rem;
+        color: $blue;
+    }
+
+    .title-status {
+        color: #fff;
+        font-size: 1rem;
+    }
+}

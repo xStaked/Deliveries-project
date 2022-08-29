@@ -17,12 +17,11 @@ const FollowProduct = () => {
     axios
       .get(`https://api-rest-full-deliveries.herokuapp.com/relations?select=id_order,tracking_order,id_user_order,id_product_order,name_product,image_product,order_date_order,paking_time_order,transportation_time_order,delivery_time_order&rel=orders,products,users&type=order,product,user&linkTo=date_create_order&betweenIn=2022-08-01&betweenOut=2022-08-30&orderBy=id_order&orderMode=asc&startAt=0&endAt=2&filterTo=id_user_order&inTo=${idUser}`, { headers }) // get all orders
       .then((res) => {
-        setData(res.data.detalle);
+        setData(res.data.response);
       })
       .catch(console.err);
   }, []);
 
-  console.log(data)
 
   return (
     <Container className="container-follow">
@@ -31,19 +30,19 @@ const FollowProduct = () => {
           <h2 className="follow-title my-4">Estado total del envío</h2>
         </Col>
       </Row>
-      {data.map((item) => {
+      { data ?  data.map((item) => {
         return (
           <FollowStatus
-            key={item.id}
+            key={item.id_order}
             deliveryDate={item.order_date_order}
             packagingDate={item.paking_time_order}
             translateDate={item.transportation_time_order}
             shippingDate={item.delivery_time_order}
             productName={item.name_product}
             imgProduct={item.image_product}
-          />
+            />
         );
-      })}
+      }): <h2 className="text-dev">El usuario no cuenta con ninguna orden</h2> }
     </Container>
   );
 };

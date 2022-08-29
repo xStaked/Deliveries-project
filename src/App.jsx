@@ -13,6 +13,7 @@ import Error from "./pages/404/Error";
 
 const App = () => {
   const token = localStorage.getItem("token");
+  const idRol = localStorage.getItem("id_rol");
 
   return (
     <>
@@ -24,7 +25,7 @@ const App = () => {
             <Route path="/contacto" exact element={<Contact />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/register" exact element={<Register />} />
-            <Route path="/admin" exact element={<BackOffice />} />
+            <Route path="/admin" exact element={ <BackOffice /> } />
             <Route
               path="/followProduct"
               element={

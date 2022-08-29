@@ -1,29 +1,39 @@
 @import "../../styles/variables";
 
 .container-backoffice {
-    background-color: $background;
-    height: 100vh;
-    .title {
-        color: $blue;
-        text-align: center;
-        margin-top: 1rem;
+  background-color: $background;
+  height: 100vh;
+  .title {
+    color: $blue;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .label {
+    color: $blue;
+    margin-top: 1rem;
+  }
+  .accordion-product {
+    background-color: $dark-blue;
+    box-shadow: rgba(117, 121, 127, 0.441) 0px 8px 24px;
+
+    .accordion-button {
+      color: $blue !important;
+      font-size: 1.2rem;
     }
 
-    .label {
-        color: $blue;
-        margin-top: 1rem;
+    .product-title {
+      color: $blue;
     }
-    .accordion-product {
-        background-color: $dark-blue;
-        box-shadow: rgba(117, 121, 127, 0.441) 0px 8px 24px;
+  }
+}
 
-        .accordion-button {
-            color: $blue !important;
-            font-size: 1.2rem;
-        }
-
-        .product-title {
-            color: $blue;
-        }
-    }
+.search-icon {
+  color: $blue;
+  font-size: 1rem;
+  margin-right: 1rem;
+  background-color: $dark-blue;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
 }

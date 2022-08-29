@@ -38,15 +38,15 @@ const NavbarComponent = ({ children }) => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link>
-                <Link to="nosotros" className="link">
+              <Nav.Link href="nosotros">
+                {/* <Link to="nosotros" className="link"> */}
                   Nosotros
-                </Link>
+                {/* </Link> */}
               </Nav.Link>
-              <Nav.Link>
-                <Link to={"contacto"} className="link">
+              <Nav.Link href="contacto">
+                {/* <Link to={"contacto"} className="link"> */}
                   Contactanos
-                </Link>
+                {/* </Link> */}
               </Nav.Link>
             </Nav>
             {/* <Nav>
@@ -82,18 +82,18 @@ const NavbarComponent = ({ children }) => {
             ) : (
               <Nav className="d-flex flex-column justify-content-center align-items-center">
                 <Nav>
-                  <Nav.Link className="login text-center mx-2">
+                  <Nav.Link className="login text-center mx-2" href="login">
                     {" "}
                     <BsFillArrowRightCircleFill className="login-icon mx-1" />{" "}
-                    <Link to="login" className="link">
+                    {/* <Link to="login" className="link"> */}
                       <span className="text-login">Login</span>
-                    </Link>
-                  </Nav.Link>
-                  <Nav.Link className="register text-center">
+                    {/* </Link> */}
+                   </Nav.Link>
+                  <Nav.Link className="register text-center" href="register">
                     <BsFillArrowLeftCircleFill className="register-icon mx-1" />
-                    <Link to="register">
+                    {/* <Link to="register"> */}
                       <span className="register-text">Register</span>
-                    </Link>
+                    {/* </Link> */}
                   </Nav.Link>
                 </Nav>
                 <Nav>
@@ -119,47 +119,3 @@ const NavbarComponent = ({ children }) => {
 
 export default NavbarComponent;
 
-const NavLogin = ({ children, removeToken }) => {
-  const token = localStorage.getItem("token");
-
-  return <></>;
-};
-
-const NavRegister = ({ children }) => {
-  return (
-    <>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand>
-            <Link to="/" className="link">
-              Incio
-            </Link>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link>
-                <Link to="nosotros" className="link">
-                  Nosotros
-                </Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to={"contacto"} className="link">
-                  Contactanos
-                </Link>
-              </Nav.Link>
-            </Nav>
-            {/* <Nav>
-            <Nav.Link>
-            {" "}
-            <img src="" alt="logo" />{" "}
-            </Nav.Link>
-            
-          </Nav> */}
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-      {children}
-    </>
-  );
-};
