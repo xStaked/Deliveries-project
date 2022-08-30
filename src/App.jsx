@@ -14,6 +14,7 @@ import Error from "./pages/404/Error";
 const App = () => {
   const token = localStorage.getItem("token");
   const idRol = localStorage.getItem("id_rol");
+  // ** ID 4 = ADMIN **
 
   return (
     <>

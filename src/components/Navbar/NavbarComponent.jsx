@@ -19,6 +19,7 @@ const NavbarComponent = ({ children }) => {
     await localStorage.removeItem("token");
     await localStorage.removeItem("id");
     navigate("/", { replace: true });
+    window.location.reload();
   };
 
   useEffect(() => {

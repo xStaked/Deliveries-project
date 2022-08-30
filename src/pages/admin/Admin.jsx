@@ -85,6 +85,7 @@ const Admin = () => {
                 translateDate={item.transportation_time_order}
                 shippingDate={item.delivery_time_order}
                 active={item.active_order}
+                id_user={item.id_user_order}
               />
             );
           })}
