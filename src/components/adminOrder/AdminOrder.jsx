@@ -3,54 +3,50 @@ import { Row, Col, Form, Button } from "react-bootstrap";
 import "./admin.Styles.scss";
 import axios from "axios";
 const AdminOrder = ({
+  id_order,
+  productName,
   deliveryDate,
   packagingDate,
   translateDate,
   shippingDate,
-  productName,
   active,
-  id_order,
 }) => {
   const [dataOrder, setDataOrder] = useState({});
-  const [ packingTime, setPackagingTime ] = useState();
-
+  const [ packingTime, setPackingTime ] = useState();
   const onChange = (e) => {
-    setDataOrder({ ...dataOrder, [e.target.name]: e.target.value });
+    setDataOrder({ ...dataOrder, [e.target.name]: parseInt(e.target.value) });
   };
-
+  
   const headers = {
-    Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
-    'Content-Type': 'application/x-www-form-urlencoded'
+    'Authorization': "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
   };
-
+  const onChangePackingTime = (e) => {
+    setPackingTime(e.target.value);
+  };
   const onSubmitUpdate = (e) => {
     onUpdate();
   };
-
   console.log(packingTime);
-  const onUpdate = async () => {
+  const onUpdate = () => {
     const data = new FormData();
-    data.append("packing_time_order", packingTime);
-    
+    data.append("order_date_order", deliveryDate);
+    data.append("paking_time_order", packagingDate);
+    data.append("transportation_time_order", translateDate);
+    data.append("delivery_time_order", deliveryDate);
+    data.append("active_order", active);
+    console.log({...data });
     const token = localStorage.getItem("token");
-    const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpbml0IjoxNjYxOTEyMTAyLCJleHAiOjE2NjE5OTg1MDIsImRhdGEiOnsiaWQiOjg0LCJlbWFpbCI6ImFkbWluQGRlbGV2ZXJpZXMudGsifX0.2M2e0MYX_IPxl9a6-ESwfx6TAHo9WU1auXDOqbJkXsw&tableToken=users&suffixToken=user`
-
-   await axios
-      .put(
-        endpoint,
-        data ,
-        { headers }
-      )
-      .then((res) => {
+    const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&token=${token}&tableToken=users&suffixToken=user`
+    axios.put(
+      endpoint,
+      data,
+      { headers }
+    ).then((res) => {
         console.log(res);
-      })
-      .catch((err) => {
+      }).catch((err) => {
         console.log(err);
       });
   };
-
-    console.log(packingTime);
-
     const onDelete = () => {
     axios
       .delete(
@@ -92,7 +88,8 @@ const AdminOrder = ({
                   name="paking_time_order"
                   type="number"
                   placeholder="Días"
-                  onChange={ (e) => setPackagingTime(e.target.value) }
+                  onChange={onChange}
+                  // onChange={ (e) => setPackagingTime(e.target.value) }
                 />
               </Form.Group>
             </Col>
@@ -107,6 +104,7 @@ const AdminOrder = ({
                   name="transportation_time_order"
                   type="number"
                   placeholder="Días"
+                  onChange={onChange}
                 />
               </Form.Group>
             </Col>
@@ -121,6 +119,7 @@ const AdminOrder = ({
                   name="delivery_time_order"
                   type="number"
                   placeholder="Días"
+                  onChange={onChange}
                 />
               </Form.Group>
             </Col>
@@ -135,6 +134,7 @@ const AdminOrder = ({
                   as="select"
                   name="active_order"
                   defaultValue={active != 0 ? "1" : "0"}
+                  onChange={onChange}
                 >
                   <option value="1">Si</option>
                   <option value="0">No</option>
@@ -144,7 +144,7 @@ const AdminOrder = ({
           </Form>
         </Row>
         <Col className="d-flex flex-column justify-content-evenly align-items-center mx-3">
-          <Button className="my-2" onClick={onSubmitUpdate}> Editar </Button>
+          <Button className="my-2" onClick={onUpdate}> Editar </Button>
           <Button variant="danger" onClick={onDelete}  className="my-2">
             {" "}
             Eliminar{" "}
