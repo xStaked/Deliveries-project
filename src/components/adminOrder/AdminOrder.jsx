@@ -12,37 +12,33 @@ const AdminOrder = ({
   id_order,
 }) => {
   const [dataOrder, setDataOrder] = useState({});
+  const [ packingTime, setPackagingTime ] = useState();
+
   const onChange = (e) => {
     setDataOrder({ ...dataOrder, [e.target.name]: e.target.value });
   };
 
   const headers = {
     Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
+    'Content-Type': 'application/x-www-form-urlencoded'
   };
 
   const onSubmitUpdate = (e) => {
     onUpdate();
   };
 
-
+  console.log(packingTime);
   const onUpdate = async () => {
     const data = new FormData();
-    // data.append('formData', dataOrder);
-    // data.append("delivery_time_order", dataOrder.delivery_time_order);
-
-    // data.append("id_user_order", dataOrder.id_user_order);
-    // data.append("id_product_order", dataOrder.id_product_order);
-    // data.append("order_date_order", dataOrder.order_date_order);
-    data.append("paking_time_order", dataOrder.paking_time_order);
-    // data.append("transportation_time_order", dataOrder.transportation_time_order);
-    // data.append("active_order", dataOrder.active_order);
+    data.append("packing_time_order", packingTime);
+    
     const token = localStorage.getItem("token");
     const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpbml0IjoxNjYxOTEyMTAyLCJleHAiOjE2NjE5OTg1MDIsImRhdGEiOnsiaWQiOjg0LCJlbWFpbCI6ImFkbWluQGRlbGV2ZXJpZXMudGsifX0.2M2e0MYX_IPxl9a6-ESwfx6TAHo9WU1auXDOqbJkXsw&tableToken=users&suffixToken=user`
 
    await axios
       .put(
         endpoint,
-        data,
+        data ,
         { headers }
       )
       .then((res) => {
@@ -53,7 +49,7 @@ const AdminOrder = ({
       });
   };
 
-  console.log(dataOrder);
+    console.log(packingTime);
 
     const onDelete = () => {
     axios
@@ -96,6 +92,7 @@ const AdminOrder = ({
                   name="paking_time_order"
                   type="number"
                   placeholder="Días"
+                  onChange={ (e) => setPackagingTime(e.target.value) }
                 />
               </Form.Group>
             </Col>
