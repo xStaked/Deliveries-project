@@ -9,7 +9,7 @@ const AdminOrder = ({
   shippingDate,
   productName,
   active,
-  id_user,
+  id_order,
 }) => {
   const [dataOrder, setDataOrder] = useState({});
   const onChange = (e) => {
@@ -21,12 +21,13 @@ const AdminOrder = ({
   };
 
   const onSubmitUpdate = (e) => {
-    e.preventDefault();
     onUpdate();
   };
 
-  const onUpdate = () => {
+
+  const onUpdate = async () => {
     const data = new FormData();
+    // data.append('formData', dataOrder);
     // data.append("delivery_time_order", dataOrder.delivery_time_order);
 
     // data.append("id_user_order", dataOrder.id_user_order);
@@ -36,30 +37,12 @@ const AdminOrder = ({
     // data.append("transportation_time_order", dataOrder.transportation_time_order);
     // data.append("active_order", dataOrder.active_order);
     const token = localStorage.getItem("token");
-    console.log(data);
-    const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_user}&nameId=id_order&token=${token}&tableToken=users&suffix=user`
-// 
-    axios
+    const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpbml0IjoxNjYxOTEyMTAyLCJleHAiOjE2NjE5OTg1MDIsImRhdGEiOnsiaWQiOjg0LCJlbWFpbCI6ImFkbWluQGRlbGV2ZXJpZXMudGsifX0.2M2e0MYX_IPxl9a6-ESwfx6TAHo9WU1auXDOqbJkXsw&tableToken=users&suffixToken=user`
+
+   await axios
       .put(
         endpoint,
         data,
-        { headers }
-      )
-      .then((res) => {
-        console.log(res);
-      });
-  };
-
-  console.log(dataOrder);
-
-  const onSubmitDelete = (e) => {
-    e.preventDefault();
-    onDelete();
-  };
-  const onDelete = () => {
-    axios
-      .delete(
-        `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_user}&nameId=id_order&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpbml0IjoxNjYxMTMyNjcxLCJleHAiOjE2NjEyMTkwNzEsImRhdGEiOnsiaWQiOjg0LCJlbWFpbCI6ImFkbWluQGRlbGV2ZXJpZXMudGsifX0.U4pH28b_J9RDZvetVSNB1GJtdHACJmoYRN54tYAP8Ho&tableToken=users&suffix=user`,
         { headers }
       )
       .then((res) => {
@@ -68,6 +51,19 @@ const AdminOrder = ({
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  console.log(dataOrder);
+
+    const onDelete = () => {
+    axios
+      .delete(
+        `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&suffix=order&desactive=true&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpbml0IjoxNjYxOTEyMTAyLCJleHAiOjE2NjE5OTg1MDIsImRhdGEiOnsiaWQiOjg0LCJlbWFpbCI6ImFkbWluQGRlbGV2ZXJpZXMudGsifX0.2M2e0MYX_IPxl9a6-ESwfx6TAHo9WU1auXDOqbJkXsw&tableToken=users&suffixToken=user`,
+        { headers }
+      )
+      .then((res) => {
+        console.log(res);
+      })
   };
   return (
     <div className="d-flex justify-content-center align-items-center  my-2">
@@ -152,7 +148,7 @@ const AdminOrder = ({
         </Row>
         <Col className="d-flex flex-column justify-content-evenly align-items-center mx-3">
           <Button className="my-2" onClick={onSubmitUpdate}> Editar </Button>
-          <Button variant="danger" className="my-2">
+          <Button variant="danger" onClick={onDelete}  className="my-2">
             {" "}
             Eliminar{" "}
           </Button>

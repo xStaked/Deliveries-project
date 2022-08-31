@@ -43,6 +43,9 @@ const Admin = () => {
     });
   };
 
+  console.log(data)
+
+
   return (
     <Container className="container-Admin">
       <Row className="d-flex flex-column justify-content-center align-items-center">
@@ -85,7 +88,7 @@ const Admin = () => {
                 translateDate={item.transportation_time_order}
                 shippingDate={item.delivery_time_order}
                 active={item.active_order}
-                id_user={item.id_user_order}
+                id_order={item.id_order}
               />
             );
           })}
