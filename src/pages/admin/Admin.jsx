@@ -43,8 +43,7 @@ const Admin = () => {
     });
   };
 
-  console.log(data)
-
+  console.log(data);
 
   return (
     <Container className="container-Admin">
@@ -104,8 +103,8 @@ function CreateOrder(props) {
   const headers = {
     Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
   };
-  // let token = localStorage.getItem("token");
-  const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpbml0IjoxNjYxNzM1MTc3LCJleHAiOjE2NjE4MjE1NzcsImRhdGEiOnsiaWQiOjg0LCJlbWFpbCI6ImFkbWluQGRlbGV2ZXJpZXMudGsifX0.hTQuDS5qXBo0LblQFbMJrCzQuzgU7yD6Clx_BqsxVSk&tableToken=users&suffixToken=user`;
+  let token = localStorage.getItem("token");
+  const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?token=${token}&tableToken=users&suffixToken=user`;
 
   const onClick = () => {
     const data = new FormData();
@@ -114,12 +113,15 @@ function CreateOrder(props) {
     data.append("id_product_order", createOrder.id_product_order);
     data.append("order_date_order", createOrder.order_date_order);
     data.append("packing_time_order", createOrder.packing_time_order);
-    data.append("transportation_time_order", createOrder.transportation_time_order);
+    data.append(
+      "transportation_time_order",
+      createOrder.transportation_time_order
+    );
     data.append("delivery_time_order", createOrder.delivery_time_order);
     data.append("active_order", createOrder.active_order);
     //post
     axios.post(endpoint, data, { headers }).then((res) => {
-      console.log(res);
+      return console.log('wtf');
     });
   };
 
@@ -137,48 +139,56 @@ function CreateOrder(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4></h4>
-        <Form.Group>
-          <Form.Label>ID de la compra</Form.Label>
-          <Form.Control name="tracking_order" type="number" />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Id se usuario</Form.Label>
-          <Form.Control name="id_user_order" type="number" />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Id del producto a enviar</Form.Label>
-          <Form.Control name="id_product_order" type="number" />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Fecha de la orden</Form.Label>
-          <Form.Control name="order_date_order" type="date" />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Tiempo de empacado</Form.Label>
-          <Form.Control name="packing_time_order" type="number" />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Tiempo de translado</Form.Label>
-          <Form.Control name="transportation_time_order" type="number" />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Tiempo de entrega</Form.Label>
-          <Form.Control name="delivery_time_order" type="number" />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Entregado</Form.Label>
-          <Form.Control as="select" name="active_order" defaultValue={0}>
-            <option value={1}>Si</option>
-            <option value={0}>No</option>
-          </Form.Control>
-        </Form.Group>
+        <Form>
+          <Form.Group>
+            <Form.Label>ID de la compra</Form.Label>
+            <Form.Control name="tracking_order" type="number" required />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Id se usuario</Form.Label>
+            <Form.Control name="id_user_order" type="number" required />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Id del producto a enviar</Form.Label>
+            <Form.Control name="id_product_order" type="number" required />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Fecha de la orden</Form.Label>
+            <Form.Control name="order_date_order" type="date" required />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Tiempo de empacado</Form.Label>
+            <Form.Control name="packing_time_order" type="number" required />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Tiempo de translado</Form.Label>
+            <Form.Control
+              name="transportation_time_order"
+              type="number"
+              required
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Tiempo de entrega</Form.Label>
+            <Form.Control name="delivery_time_order" type="number" required />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Entregado</Form.Label>
+            <Form.Control
+              as="select"
+              name="active_order"
+              defaultValue={0}
+              required
+            >
+              <option value={1}>Si</option>
+              <option value={0}>No</option>
+            </Form.Control>
+            <Button type="submit" variant="success" className="my-1">
+              <span onClick={onClick}>Crear Orden</span>
+            </Button>
+          </Form.Group>
+        </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="success" onClick={props.onHide}>
-          <span onClick={onClick}>Crear Orden</span>
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 }

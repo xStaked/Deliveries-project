@@ -18,4 +18,21 @@
         color: #fff;
         font-size: 1rem;
     }
+    .title-pre {
+        color: #198754;
+        font-weight: 600;
+        font-size: 1rem;
+    }
+}
+
+@media(max-width: 768px) {
+    .card-up {
+        flex-direction: column!important;
+    }
+    .form-order {
+        display: flex;
+        flex-direction: column !important;
+        align-items: center;
+        justify-content: center;
+    }
 }

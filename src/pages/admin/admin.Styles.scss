@@ -37,3 +37,10 @@
   height: 3rem;
   border-radius: 50%;
 }
+
+@media (max-width: 768px) {
+  .container-Admin {
+    height: 100% !important;
+  }
+}
+  
