@@ -11,29 +11,42 @@ const AdminOrder = ({
   shippingDate,
   active,
 }) => {
-  const [dataOrder, setDataOrder] = useState({});
-  const [ packingTime, setPackingTime ] = useState();
+  const [ deliveryChange, setDeliveryChange ] = useState();
+  const [ packingChange, setPackingChange ] = useState();
+  const [ translateChange, setTranslateChange ] = useState();
+  const [ shippingChange, setShippingChange ] = useState();
+  const [ activeChange, setActiveChange ] = useState();
   const onChange = (e) => {
     setDataOrder({ ...dataOrder, [e.target.name]: parseInt(e.target.value) });
   };
-  
   const headers = {
     'Authorization': "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
   };
-  const onChangePackingTime = (e) => {
-    setPackingTime(e.target.value);
+  const onDeliveryChange = (e) => {
+    setDeliveryChange(e.target.value);
+  };
+  const onPackingChange = (e) => {
+    setPackingChange(e.target.value);
+  };
+  const onTranslateChange = (e) => {
+    setTranslateChange(e.target.value);
+  };
+  const onShippingChange = (e) => {
+    setShippingChange(e.target.value);
+  };
+  const onActiveChange = (e) => {
+    setActiveChange(e.target.value);
   };
   const onSubmitUpdate = (e) => {
     onUpdate();
   };
-  console.log(packingTime);
   const onUpdate = () => {
     const data = new FormData();
-    data.append("order_date_order", deliveryDate);
-    data.append("paking_time_order", packagingDate);
-    data.append("transportation_time_order", translateDate);
-    data.append("delivery_time_order", deliveryDate);
-    data.append("active_order", active);
+    data.append("order_date_order", deliveryChange);
+    data.append("paking_time_order", packingChange);
+    data.append("transportation_time_order", translateChange);
+    data.append("delivery_time_order", shippingChange);
+    data.append("active_order", activeChange);
     console.log({...data });
     const token = localStorage.getItem("token");
     const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&token=${token}&tableToken=users&suffixToken=user`
@@ -73,8 +86,11 @@ const AdminOrder = ({
                   Fecha de la orden
                 </Form.Label>
                 <span className="title-status">{deliveryDate}</span>
-
-                <Form.Control name="order_date_order" type="date" />
+                <Form.Control
+                  name="order_date_order"
+                  type="date"
+                  onChange={onDeliveryChange}
+                />
               </Form.Group>
             </Col>
             <Col className="mx-2">
@@ -83,13 +99,11 @@ const AdminOrder = ({
                   Tiempo de empacado
                 </Form.Label>
                 <span className="title-status">{packagingDate} Días</span>
-
                 <Form.Control
                   name="paking_time_order"
                   type="number"
                   placeholder="Días"
-                  onChange={onChange}
-                  // onChange={ (e) => setPackagingTime(e.target.value) }
+                  onChange={onPackingChange}
                 />
               </Form.Group>
             </Col>
@@ -99,12 +113,11 @@ const AdminOrder = ({
                   Tiempo de translado
                 </Form.Label>
                 <span className="title-status">{translateDate} Días</span>
-
                 <Form.Control
                   name="transportation_time_order"
                   type="number"
                   placeholder="Días"
-                  onChange={onChange}
+                  onChange={onTranslateChange}
                 />
               </Form.Group>
             </Col>
@@ -114,12 +127,11 @@ const AdminOrder = ({
                   Tiempo de entrega
                 </Form.Label>
                 <span className="title-status">{shippingDate} Días</span>
-
                 <Form.Control
                   name="delivery_time_order"
                   type="number"
                   placeholder="Días"
-                  onChange={onChange}
+                  onChange={onShippingChange}
                 />
               </Form.Group>
             </Col>
@@ -129,12 +141,11 @@ const AdminOrder = ({
                 <span className="title-status">
                   {active == 0 ? `NO Entregado` : "Entregado"}{" "}
                 </span>
-
                 <Form.Control
                   as="select"
                   name="active_order"
                   defaultValue={active != 0 ? "1" : "0"}
-                  onChange={onChange}
+                  onChange={onActiveChange}
                 >
                   <option value="1">Si</option>
                   <option value="0">No</option>
@@ -144,7 +155,7 @@ const AdminOrder = ({
           </Form>
         </Row>
         <Col className="d-flex flex-column justify-content-evenly align-items-center mx-3">
-          <Button className="my-2" onClick={onUpdate}> Editar </Button>
+          <Button className="my-2" onClick={onSubmitUpdate}> Editar </Button>
           <Button variant="danger" onClick={onDelete}  className="my-2">
             {" "}
             Eliminar{" "}
