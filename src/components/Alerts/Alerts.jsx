@@ -8,6 +8,7 @@ const Alerts = ({ type }) => {
     <>
       {type === "success" && <SuccesAlert />}
       {type === "danger" && <DangerAlert />}
+      {type === "method" && <MethodAlert />}
       {type === "registerSuccess" && <RegisterSucces />}
       {type === "registerDanger" && <RegisterDanger />}
     </>
@@ -48,6 +49,15 @@ const RegisterDanger = () => {
     <Alert id="danger">
       <AiOutlineCloseCircle className="danger" />
       ERROR AL ¡REGISTRARSE!
+    </Alert>
+  );
+};
+
+const MethodAlert = () => {
+  return (
+    <Alert id="method">
+      <AiOutlineCloseCircle className="danger" />
+      ERROR EN EL ¡METODO!
     </Alert>
   );
 };

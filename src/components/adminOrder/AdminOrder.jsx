@@ -14,7 +14,7 @@ const AdminOrder = ({
   const [ deliveryChange, setDeliveryChange ] = useState();
   const [ packingChange, setPackingChange ] = useState();
   const [ translateChange, setTranslateChange ] = useState();
-  const [ shippingChange, setShippingChange ] = useState();
+  const [shippingChange, setShippingChange] = useState();
   const [ activeChange, setActiveChange ] = useState();
   const onChange = (e) => {
     setDataOrder({ ...dataOrder, [e.target.name]: parseInt(e.target.value) });
@@ -42,22 +42,23 @@ const AdminOrder = ({
   };
   const onUpdate = () => {
     const data = new FormData();
-    deliveryChange==undefined ?? data.append("order_date_order", deliveryChange);
-    packingChange==undefined ??data.append("packing_time_order", packingChange);
-    translateChange==undefined ?? data.append("transportation_time_order", translateChange);
-    shippingChange==undefined ?? data.append("delivery_time_order", shippingChange);
-    activeChange==undefined ?? data.append("active_order", activeChange);
-    console.log({...data });
+    deliveryChange != undefined && data.append("order_date_order", deliveryChange);
+    packingChange != undefined && data.append("packing_time_order", packingChange);
+    translateChange != undefined && data.append("transportation_time_order", translateChange);
+    shippingChange != undefined && data.append("delivery_time_order", shippingChange);
+    activeChange != undefined && data.append("active_order", activeChange);
+    console.log({ ...data });
     const token = localStorage.getItem("token");
     const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&token=${token}&tableToken=users&suffixToken=user`
-    axios.put(
-      endpoint,
-      data,
-      { headers }
-    ).then((res) => {
+      axios.put(
+        endpoint,
+        data,
+        { headers }
+      ).then((res) => {
         console.log(res);
       }).catch((err) => {
         console.log(err);
+        <Alerts type="MethodAlert" />
       });
   };
     const onDelete = () => {
