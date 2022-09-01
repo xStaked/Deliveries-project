@@ -42,11 +42,11 @@ const AdminOrder = ({
   };
   const onUpdate = () => {
     const data = new FormData();
-    data.append("order_date_order", deliveryChange);
-    data.append("paking_time_order", packingChange);
-    data.append("transportation_time_order", translateChange);
-    data.append("delivery_time_order", shippingChange);
-    data.append("active_order", activeChange);
+    deliveryChange==undefined ?? data.append("order_date_order", deliveryChange);
+    packingChange==undefined ??data.append("packing_time_order", packingChange);
+    translateChange==undefined ?? data.append("transportation_time_order", translateChange);
+    shippingChange==undefined ?? data.append("delivery_time_order", shippingChange);
+    activeChange==undefined ?? data.append("active_order", activeChange);
     console.log({...data });
     const token = localStorage.getItem("token");
     const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&token=${token}&tableToken=users&suffixToken=user`

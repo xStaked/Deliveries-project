@@ -89,7 +89,7 @@ const NavbarComponent = ({ children }) => {
                     {/* <Link to="login" className="link"> */}
                       <span className="text-login">Login</span>
                     {/* </Link> */}
-                   </Nav.Link>
+                  </Nav.Link>
                   <Nav.Link className="register text-center" href="register">
                     <BsFillArrowLeftCircleFill className="register-icon mx-1" />
                     {/* <Link to="register"> */}
