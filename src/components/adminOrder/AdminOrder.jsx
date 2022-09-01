@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import "./admin.Styles.scss";
+import Alerts from "../Alerts/Alerts";
 import axios from "axios";
 const AdminOrder = ({
   id_order,
@@ -47,9 +48,9 @@ const AdminOrder = ({
     translateChange != undefined && data.append("transportation_time_order", translateChange);
     shippingChange != undefined && data.append("delivery_time_order", shippingChange);
     activeChange != undefined && data.append("active_order", activeChange);
-    console.log({ ...data });
     const token = localStorage.getItem("token");
     const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&token=${token}&tableToken=users&suffixToken=user`
+    if (data.length > 0) {
       axios.put(
         endpoint,
         data,
@@ -58,8 +59,10 @@ const AdminOrder = ({
         console.log(res);
       }).catch((err) => {
         console.log(err);
-        <Alerts type="MethodAlert" />
       });
+    } else {
+      <Alerts type="MethodAlert" />;
+    };
   };
     const onDelete = () => {
     axios
