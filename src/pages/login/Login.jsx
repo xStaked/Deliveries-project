@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import loginImg from "../../assets/loginIMG.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 // Styles
 import "./Login.Styles.scss";
@@ -13,7 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [response, setResponse] = useState();
   const token = localStorage.getItem("token");
-
+  let navigate = useNavigate();
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -49,10 +49,12 @@ const Login = () => {
     if (response) {
       localStorage.setItem("token", response.response[0].token_user);
       localStorage.setItem("id", response.response[0].id_user);
-      localStorage.setItem( "id_rol" ,response.response[0].id_rol_user);
-    window.location.reload();
-
-    }else {
+      localStorage.setItem("id_rol", response.response[0].id_rol_user);
+      if (response.response[0].id_rol_user == 4) {
+        navigate("/admin");
+      }
+      window.location.reload();
+    } else {
       console.error("No hay respuesta");
     }
   }, [response]);
