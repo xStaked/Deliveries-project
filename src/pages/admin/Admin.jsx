@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Row,
@@ -7,6 +7,7 @@ import {
   Button,
   InputGroup,
   Modal,
+  Alert
 } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import AdminOrder from "../../components/adminOrder/AdminOrder";
@@ -18,8 +19,15 @@ const Admin = () => {
   const [data, setData] = useState([]);
   const [create, setCreate] = useState(false);
   const [createOrder, setCreateOrder] = useState({});
+  const [ error, setError ] = useState(false);
+  const [ width, setWidth ] = useState();
 
-  console.log(createOrder);
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      setWidth(window.innerWidth);
+    })
+  }, [width])
+
 
   const handleChange = (e) => {
     setCreateOrder({ ...createOrder, [e.target.name]: e.target.value });
@@ -38,16 +46,19 @@ const Admin = () => {
   };
 
   const api = () => {
+    setData([])
     axios.get(endpoint, { headers }).then((res) => {
       setData(res.data.response);
-    });
+      setError(false);
+    }).catch(() => {
+      setError(true)
+    })
   };
 
-  console.log(data);
 
   return (
-    <Container className="container-Admin">
-      <Row className="d-flex flex-column justify-content-center align-items-center">
+    <Container className="container-Admin" style={ data.length > 0 ? { height: '100%'  }: {border:'0'}} >
+      <Row className="d-flex flex-column justify-content-center align-items-center admin" >
         <Col xl={6}>
           <h2 className="title">Dashboard</h2>
 
@@ -76,6 +87,12 @@ const Admin = () => {
               change={handleChange}
             />
           </InputGroup>
+          {
+            error ? <Alert variant="danger" className="my-2"> 
+              No se encontraron resultados
+            </Alert>
+             : null
+          }
         </Col>
         {data &&
           data.map((item) => {
