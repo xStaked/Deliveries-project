@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Alert } from "react-bootstrap";
 import signUp from "../../assets/signup.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -9,6 +9,7 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
+    const [ alert, setAlert ] = useState();
 
     const handleChangeEmail = (e) => {
       setEmail(e.target.value);
@@ -26,10 +27,6 @@ const Register = () => {
       postRegister();
     };
 
-    console.log(
-      email
-    )
-
     const endpoint =
       "https://api-rest-full-deliveries.herokuapp.com/users?register=true&suffix=user";
 
@@ -44,11 +41,12 @@ const Register = () => {
       axios
         .post(endpoint, data, { headers })
         .then((res) => {
-          console.log(res);
+          setAlert(true);
         })
         .catch((err) => {
-          console.log(err);
+          setAlert(false);
         });
+        setAlert(null);
     };
     return (
       <Col className="d-flex flex-column justify-content-center align-items-center">
@@ -90,6 +88,9 @@ const Register = () => {
             className="form-control mb-3 login-button"
             disabled={!(password === passwordConfirm)}
           />
+          {
+            password !== passwordConfirm ? <p className="match-pass"> Las contaseñas deben ser iguales </p> : null
+          }
         </form>
         <div className="d-flex flex-row justify-content-center text-contain">
           <p className="mx-3 qa">¿Ya tienes cuenta? </p>
@@ -97,6 +98,9 @@ const Register = () => {
             <span className="register-log">Login</span>
           </Link>
         </div>
+        {
+          alert ? <Alert variant="success">Registro exitoso</Alert> : alert != null && alert != true ? <Alert variant="danger">Error al registrar</Alert> : null
+        }
       </Col>
     );
   };

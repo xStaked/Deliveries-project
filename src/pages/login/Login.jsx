@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Alert } from "react-bootstrap";
 import loginImg from "../../assets/loginIMG.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -12,6 +12,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [response, setResponse] = useState();
+  const [alert, setSetAlert] = useState();
   const token = localStorage.getItem("token");
   let navigate = useNavigate();
   const onChangeEmail = (e) => {
@@ -42,7 +43,10 @@ const Login = () => {
         setSucces(true);
         setResponse(res.data);
       })
-      .catch(console.err);
+      .catch(() => {
+        setSetAlert(true);
+      });
+    setSetAlert(false);
   };
 
   useEffect(() => {
@@ -63,43 +67,48 @@ const Login = () => {
   const renderForm = (
     <>
       {!token ? (
-        <Col className="d-flex flex-column justify-content-center align-items-center">
-          <h3 className="title-login">Login</h3>
-          <form
-            onSubmit={handleSubmit}
-            className="d-flex flex-column justify-content-center align-items-center"
-          >
-            <input
-              type="text"
-              placeholder="Correo electronico"
-              className="form-control mb-3"
-              name="email_user"
-              required
-              onChange={onChangeEmail}
-            />
+        <>
+          <Col className="d-flex flex-column justify-content-center align-items-center">
+            <h3 className="title-login">Login</h3>
+            <form
+              onSubmit={handleSubmit}
+              className="d-flex flex-column justify-content-center align-items-center"
+            >
+              <input
+                type="text"
+                placeholder="Correo electronico"
+                className="form-control mb-3"
+                name="email_user"
+                required
+                onChange={onChangeEmail}
+              />
 
-            <input
-              type="password"
-              placeholder="Contraseña"
-              className="form-control mb-3"
-              required
-              name="password_user"
-              onChange={onChangePassword}
-            />
+              <input
+                type="password"
+                placeholder="Contraseña"
+                className="form-control mb-3"
+                required
+                name="password_user"
+                onChange={onChangePassword}
+              />
 
-            <input
-              type="submit"
-              value="Iniciar sesión"
-              className="form-control mb-3 login-button"
-            />
-          </form>
-          <div className="d-flex flex-row justify-content-center text-contain">
-            <p className="mx-3 qa">¿No tienes cuenta? </p>
-            <Link to="register" className="text-center text-decoration-none">
-              <span className="register-log">Register</span>
-            </Link>
-          </div>
-        </Col>
+              <input
+                type="submit"
+                value="Iniciar sesión"
+                className="form-control mb-3 login-button"
+              />
+            </form>
+            <div className="d-flex flex-row justify-content-center text-contain">
+              <p className="mx-3 qa">¿No tienes cuenta? </p>
+              <Link to="register" className="text-center text-decoration-none">
+                <span className="register-log">Register</span>
+              </Link>
+            </div>
+          </Col>
+          {alert && (
+            <Alert variant="danger">Usuario o contraseña incorrectos</Alert>
+          )}
+        </>
       ) : (
         <Alerts type="success" />
       )}
