@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Form, Button } from "react-bootstrap";
+import { Row, Col, Form, Button, Alert } from "react-bootstrap";
 import "./admin.Styles.scss";
 import Alerts from "../Alerts/Alerts";
 import axios from "axios";
@@ -12,15 +12,17 @@ const AdminOrder = ({
   shippingDate,
   active,
 }) => {
-  const [ deliveryChange, setDeliveryChange ] = useState();
-  const [ packingChange, setPackingChange ] = useState();
-  const [ translateChange, setTranslateChange ] = useState();
+  const [deliveryChange, setDeliveryChange] = useState();
+  const [packingChange, setPackingChange] = useState();
+  const [translateChange, setTranslateChange] = useState();
   const [shippingChange, setShippingChange] = useState();
-  const [ activeChange, setActiveChange ] = useState();
-  const [ show, setShow ] = useState(false);
-
+  const [activeChange, setActiveChange] = useState();
+  const [show, setShow] = useState(false);
+  const [error, setError] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [errorDelete, setErrorDelete] = useState(false);
   const headers = {
-    'Authorization': "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
+    Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
   };
   const onDeliveryChange = (e) => {
     setDeliveryChange(e.target.value);
@@ -37,31 +39,40 @@ const AdminOrder = ({
   const onActiveChange = (e) => {
     setActiveChange(e.target.value);
   };
- 
+
   const onUpdate = () => {
     const data = new FormData();
-    deliveryChange != undefined ? data.append("order_date_order", deliveryChange) :  data.append("order_date_order", deliveryDate);
-    packingChange != undefined ? data.append("packing_time_order", packingChange) : data.append("packing_time_order", packagingDate);
-    translateChange != undefined ? data.append("transportation_time_order", translateChange) : data.append("transportation_time_order", translateDate);
-    shippingChange != undefined ? data.append("delivery_time_order", shippingChange) : data.append("delivery_time_order", shippingDate);
-    activeChange != undefined ? data.append("active_order", activeChange) : data.append("active_order", active);
+    deliveryChange != undefined
+      ? data.append("order_date_order", deliveryChange)
+      : data.append("order_date_order", deliveryDate);
+    packingChange != undefined
+      ? data.append("packing_time_order", packingChange)
+      : data.append("packing_time_order", packagingDate);
+    translateChange != undefined
+      ? data.append("transportation_time_order", translateChange)
+      : data.append("transportation_time_order", translateDate);
+    shippingChange != undefined
+      ? data.append("delivery_time_order", shippingChange)
+      : data.append("delivery_time_order", shippingDate);
+    activeChange != undefined
+      ? data.append("active_order", activeChange)
+      : data.append("active_order", active);
     const token = localStorage.getItem("token");
-    const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&token=${token}&tableToken=users&suffixToken=user`
-    console.log(    data.length
-      )
-      axios.put(
-        endpoint,
-        data,
-        { headers }
-      ).then((res) => {
+    const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&token=${token}&tableToken=users&suffixToken=user`;
+    console.log(data.length);
+    axios
+      .put(endpoint, data, { headers })
+      .then((res) => {
         setShow(true);
-        console.error('Update success');
-      }).catch((err) => {
+        console.error("Update success");
+      })
+      .catch((err) => {
+        setError(true);
         console.log(err);
       });
-    
+    setShow(false);
   };
-    const onDelete = () => {
+  const onDelete = () => {
     axios
       .delete(
         `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&suffix=order&desactive=true&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpbml0IjoxNjYxOTEyMTAyLCJleHAiOjE2NjE5OTg1MDIsImRhdGEiOnsiaWQiOjg0LCJlbWFpbCI6ImFkbWluQGRlbGV2ZXJpZXMudGsifX0.2M2e0MYX_IPxl9a6-ESwfx6TAHo9WU1auXDOqbJkXsw&tableToken=users&suffixToken=user`,
@@ -69,16 +80,19 @@ const AdminOrder = ({
       )
       .then((res) => {
         console.log(res);
+        setErrorDelete(false);
       })
+      .catch((err) => {
+        setErrorDelete(true);
+      });
+    setErrorDelete(false);
   };
   return (
     <div className="d-flex justify-content-center align-items-center  my-2 container-order">
       <div className="card-status">
         <div className="d-flex justify-content-evenly align-items-center card-up">
           <h5 className="product-name mx-2 text-center"> {productName} </h5>
-          <Form
-            className="d-flex  justify-content-evenly align-items-center form-order"
-          >
+          <Form className="d-flex  justify-content-evenly align-items-center form-order">
             <Col className="mx-4">
               <Form.Group className="d-flex flex-column justify-content-around align-items-center">
                 <Form.Label className="title-status">
@@ -154,14 +168,26 @@ const AdminOrder = ({
           </Form>
         </div>
         <Col className="d-flex flex-column justify-content-evenly align-items-center mx-3">
-          <Button className="my-2" onClick={onUpdate}> Editar </Button>
-          <Button variant="danger" onClick={onDelete}  className="my-2">
+          <Button className="my-2" onClick={onUpdate}>
+            {" "}
+            Editar{" "}
+          </Button>
+          <Button variant="danger" onClick={onDelete} className="my-2">
             {" "}
             Eliminar{" "}
           </Button>
-          {
-            show && <Alerts variant="success"/>
-          }
+          {show && <Alert variant="success"> Actualización exitosa </Alert>}
+          {error && (
+            <Alert variant="danger">
+              Error al actualizar, ingrese nuevamente
+            </Alert>
+          )}
+          {showDelete && <Alert variant="success"> Eliminación exitosa </Alert>}
+          {errorDelete && (
+            <Alert variant="danger">
+              Error al eliminar intente nuevamente{" "}
+            </Alert>
+          )}
         </Col>
       </div>
     </div>
