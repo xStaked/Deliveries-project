@@ -21,7 +21,7 @@ const Admin = () => {
   const [createOrder, setCreateOrder] = useState({});
   const [ error, setError ] = useState(false);
   const [ width, setWidth ] = useState();
-
+  const [ errorCreate, setErrorCreate ] = useState(false);
   useEffect(() => {
     window.addEventListener('resize', () => {
       setWidth(window.innerWidth);
@@ -83,8 +83,9 @@ const Admin = () => {
               show={create}
               onHide={() => setCreate(false)}
               className="my-1"
-              createOrder={createOrder}
-              change={handleChange}
+              // createOrder={createOrder}
+              // change={handleChange}
+              setErrorCreate={setErrorCreate}
             />
           </InputGroup>
           {
@@ -108,7 +109,11 @@ const Admin = () => {
               />
             );
           })}
+         
       </Row>
+      {
+        errorCreate && <Alert  variant="danger" />
+      }
     </Container>
   );
 };
@@ -116,7 +121,14 @@ const Admin = () => {
 export default Admin;
 
 function CreateOrder(props) {
-  const { change, createOrder } = props;
+
+  const [createOrder, setCreateOrder] = useState({});
+  const { setErrorCreate } = props;
+
+  const handleChange = (e) => {
+    setCreateOrder({ ...createOrder, [e.target.name]: e.target.value });
+  };
+
   const headers = {
     Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
   };
@@ -137,10 +149,21 @@ function CreateOrder(props) {
     data.append("delivery_time_order", createOrder.delivery_time_order);
     data.append("active_order", createOrder.active_order);
     //post
-    axios.post(endpoint, data, { headers }).then((res) => {
-      return console.log('wtf');
+    axios
+      .post(endpoint, data, { headers })
+      .then((res) => {
+      console.log(res)
+      setErrorCreate(true)
+      localStorage.setItem('res', createOrder)
+      })
+      .catch((err) => {
+      console.log(err)
+      localStorage.setItem('err', createOrder)
     });
+    setErrorCreate(false)
   };
+
+  console.log(createOrder);
 
   return (
     <Modal
@@ -148,7 +171,7 @@ function CreateOrder(props) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      onChange={change}
+      onChange={handleChange}
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
@@ -205,6 +228,7 @@ function CreateOrder(props) {
             </Button>
           </Form.Group>
         </Form>
+        
       </Modal.Body>
     </Modal>
   );

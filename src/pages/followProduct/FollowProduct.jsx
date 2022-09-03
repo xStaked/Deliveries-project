@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Alert } from "react-bootstrap";
 import FollowStatus from "../../components/FollowStatus/FollowStatus";
 import axios from "axios";
 
@@ -7,6 +7,7 @@ import "./follow.Styles.scss";
 
 const FollowProduct = () => {
   const [data, setData] = useState([]);
+  const [ showAlert, setShowAlert ] = useState(false);
   const idUser = localStorage.getItem("id");
 
   const headers = {
@@ -19,7 +20,10 @@ const FollowProduct = () => {
       .then((res) => {
         setData(res.data.response);
       })
-      .catch(console.err);
+      .catch((err) => {
+        setShowAlert(true);
+      });
+      setShowAlert(false);
   }, []);
 
 
@@ -30,6 +34,9 @@ const FollowProduct = () => {
           <h2 className="follow-title my-4">Estado total del envío</h2>
         </Col>
       </Row>
+      {
+        showAlert && <Alert variant="danger" className="text-center">No se encontraron resultados</Alert>
+      }
       { data ?  data.map((item) => {
         return (
           <FollowStatus
