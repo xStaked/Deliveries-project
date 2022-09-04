@@ -7,7 +7,7 @@ import {
   Button,
   InputGroup,
   Modal,
-  Alert
+  Alert,
 } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import AdminOrder from "../../components/adminOrder/AdminOrder";
@@ -19,15 +19,14 @@ const Admin = () => {
   const [data, setData] = useState([]);
   const [create, setCreate] = useState(false);
   const [createOrder, setCreateOrder] = useState({});
-  const [ error, setError ] = useState(false);
-  const [ width, setWidth ] = useState();
-  const [ errorCreate, setErrorCreate ] = useState(false);
+  const [error, setError] = useState(false);
+  const [width, setWidth] = useState();
+  const [errorCreate, setErrorCreate] = useState(false);
   useEffect(() => {
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       setWidth(window.innerWidth);
-    })
-  }, [width])
-
+    });
+  }, [width]);
 
   const handleChange = (e) => {
     setCreateOrder({ ...createOrder, [e.target.name]: e.target.value });
@@ -46,19 +45,24 @@ const Admin = () => {
   };
 
   const api = () => {
-    setData([])
-    axios.get(endpoint, { headers }).then((res) => {
-      setData(res.data.response);
-      setError(false);
-    }).catch(() => {
-      setError(true)
-    })
+    setData([]);
+    axios
+      .get(endpoint, { headers })
+      .then((res) => {
+        setData(res.data.response);
+        setError(false);
+      })
+      .catch(() => {
+        setError(true);
+      });
   };
 
-
   return (
-    <Container className="container-Admin" style={ data.length > 0 ? { height: '100%'  }: {border:'0'}} >
-      <Row className="d-flex flex-column justify-content-center align-items-center admin" >
+    <Container
+      className="container-Admin"
+      style={data.length > 0 ? { height: "100%" } : { border: "0" }}
+    >
+      <Row className="d-flex flex-column justify-content-center align-items-center admin">
         <Col xl={6}>
           <h2 className="title">Dashboard</h2>
 
@@ -88,12 +92,11 @@ const Admin = () => {
               setErrorCreate={setErrorCreate}
             />
           </InputGroup>
-          {
-            error ? <Alert variant="danger" className="my-2"> 
+          {error ? (
+            <Alert variant="danger" className="my-2">
               No se encontraron resultados
             </Alert>
-             : null
-          }
+          ) : null}
         </Col>
         {data &&
           data.map((item) => {
@@ -109,11 +112,8 @@ const Admin = () => {
               />
             );
           })}
-         
       </Row>
-      {
-        errorCreate && <Alert  variant="danger" />
-      }
+      {errorCreate && <Alert variant="danger" />}
     </Container>
   );
 };
@@ -121,7 +121,6 @@ const Admin = () => {
 export default Admin;
 
 function CreateOrder(props) {
-
   const [createOrder, setCreateOrder] = useState({});
   const { setErrorCreate } = props;
 
@@ -152,18 +151,16 @@ function CreateOrder(props) {
     axios
       .post(endpoint, data, { headers })
       .then((res) => {
-      console.log(res)
-      setErrorCreate(true)
-      localStorage.setItem('res', createOrder)
+        console.log(res);
+        setErrorCreate(true);
+        localStorage.setItem("res", createOrder);
       })
       .catch((err) => {
-      console.log(err)
-      localStorage.setItem('err', createOrder)
-    });
-    setErrorCreate(false)
+        console.log(err);
+        localStorage.setItem("err", createOrder);
+      });
+    setErrorCreate(false);
   };
-
-  console.log(createOrder);
 
   return (
     <Modal
@@ -228,7 +225,6 @@ function CreateOrder(props) {
             </Button>
           </Form.Group>
         </Form>
-        
       </Modal.Body>
     </Modal>
   );
