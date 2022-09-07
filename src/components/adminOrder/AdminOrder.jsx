@@ -73,9 +73,10 @@ const AdminOrder = ({
     setShow(false);
   };
   const onDelete = () => {
+    const token = localStorage.getItem("token");
     axios
       .delete(
-        `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&suffix=order&desactive=true&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpbml0IjoxNjYxOTEyMTAyLCJleHAiOjE2NjE5OTg1MDIsImRhdGEiOnsiaWQiOjg0LCJlbWFpbCI6ImFkbWluQGRlbGV2ZXJpZXMudGsifX0.2M2e0MYX_IPxl9a6-ESwfx6TAHo9WU1auXDOqbJkXsw&tableToken=users&suffixToken=user`,
+        `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&suffix=order&desactive=true&token=${token}&tableToken=users&suffixToken=user`,
         { headers }
       )
       .then((res) => {
