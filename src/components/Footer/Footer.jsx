@@ -17,9 +17,24 @@ const Footer = () => {
         >
           <h3 className="my-2">!Siguenos en nuestreas redes!</h3>
           <Col className="d-flex flex-row justify-content-center align-items-center">
-            <AiFillInstagram className="icon-ig mx-4 mb-4" />
-            <FaLinkedin className="icon-li mx-4 mb-4" />
-            <BsFacebook className="icon-fb mx-4 mb-4" />
+            <a
+              href="https://www.instagram.com/electricosdelvalle/"
+              target="_blank"
+            >
+              <AiFillInstagram className="icon-ig mx-4 mb-4" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/electricosdelvalle/"
+              target="_blank"
+            >
+              <BsFacebook className="icon-fb mx-4 mb-4" />
+            </a>
+            <a
+              href="https://www.facebook.com/profile.php?id=100075822712887"
+              target="_blank"
+            >
+              <FaLinkedin className="icon-li mx-4 mb-4" />
+            </a>
           </Col>
         </Col>
         <Col xl={3}>
