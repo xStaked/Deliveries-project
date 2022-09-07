@@ -24,13 +24,13 @@ const Footer = () => {
               <AiFillInstagram className="icon-ig mx-4 mb-4" />
             </a>
             <a
-              href="https://www.linkedin.com/company/electricosdelvalle/"
+              href="https://www.facebook.com/profile.php?id=100075822712887"
               target="_blank"
             >
               <BsFacebook className="icon-fb mx-4 mb-4" />
             </a>
             <a
-              href="https://www.facebook.com/profile.php?id=100075822712887"
+              href="https://www.linkedin.com/company/electricosdelvalle/"
               target="_blank"
             >
               <FaLinkedin className="icon-li mx-4 mb-4" />

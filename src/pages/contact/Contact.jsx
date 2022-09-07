@@ -93,19 +93,34 @@ const Contact = () => {
 
       <Row>
         <Col className="d-flex justify-content-center align-items-center">
-          <img src={img2} alt="img2" width={500} height={500}  className="img2"/>
+          <img
+            src={img2}
+            alt="img2"
+            width={500}
+            height={500}
+            className="img2"
+          />
         </Col>
 
-        <Col >
-            <h3 className="redes-title">Redes sociales</h3>
+        <Col>
+          <h3 className="redes-title">Redes sociales</h3>
           <div className="d-flex flex-row justify-content-center align-items-center">
-            <a>
+            <a
+              href="https://www.facebook.com/profile.php?id=100075822712887"
+              target="_blank"
+            >
               <BsFacebook className="icon" />
             </a>
-            <a>
+            <a
+              href="https://www.instagram.com/electricosdelvalle/"
+              target="_blank"
+            >
               <FiInstagram className="icon" />
             </a>
-            <a>
+            <a
+             href="https://www.linkedin.com/company/electricosdelvalle/"
+             target="_blank"
+            >
               <BsLinkedin className="icon" />
             </a>
           </div>
