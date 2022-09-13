@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Row, Col, Form, Button, Alert } from "react-bootstrap";
+import { Col, Form, Button, Alert } from "react-bootstrap";
 import "./admin.Styles.scss";
-import Alerts from "../Alerts/Alerts";
 import axios from "axios";
 const AdminOrder = ({
   id_order,

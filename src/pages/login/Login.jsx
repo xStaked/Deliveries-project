@@ -3,6 +3,7 @@ import { Container, Row, Col, Alert } from "react-bootstrap";
 import loginImg from "../../assets/loginIMG.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useForm } from "react-hook-form";
 // Styles
 import "./Login.Styles.scss";
 import Alerts from "../../components/Alerts/Alerts";
@@ -13,6 +14,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [response, setResponse] = useState();
   const [alert, setSetAlert] = useState();
+  const [error, setError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const token = localStorage.getItem("token");
   let navigate = useNavigate();
   const onChangeEmail = (e) => {
@@ -23,8 +26,20 @@ const Login = () => {
     setPassword(e.target.value);
   };
   const handleSubmit = async (e) => {
-    // <Placeholder as="p" animation="grow" variant="dark" />;
     e.preventDefault();
+
+    const emailTest = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+      email
+    );
+    const passTest = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(password);
+
+    if (!emailTest) {
+      setError("Email invalido");
+      return;
+    } else {
+      setError("");
+    }
+
     login();
   };
   const endPoint =
@@ -75,19 +90,29 @@ const Login = () => {
               className="d-flex flex-column justify-content-center align-items-center"
             >
               <input
-                type="text"
+                // type="email"
                 placeholder="Correo electronico"
                 className="form-control mb-3"
                 name="email_user"
-                required
                 onChange={onChangeEmail}
               />
 
+              {error && (
+                <span
+                  style={{
+                    color: "red",
+                    marginTop: "-.5rem",
+                    marginBottom: ".5rem",
+                  }}
+                >
+                  {" "}
+                  {error}{" "}
+                </span>
+              )}
               <input
                 type="password"
                 placeholder="Contraseña"
                 className="form-control mb-3"
-                required
                 name="password_user"
                 onChange={onChangePassword}
               />
@@ -100,7 +125,7 @@ const Login = () => {
             </form>
             <div className="d-flex flex-row justify-content-center text-contain">
               <p className="mx-3 qa">¿No tienes cuenta? </p>
-              <Link to="register" className="text-center text-decoration-none">
+              <Link to="/register" className="text-center text-decoration-none">
                 <span className="register-log">Register</span>
               </Link>
             </div>
