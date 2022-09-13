@@ -3,7 +3,6 @@ import { Container, Row, Col, Alert } from "react-bootstrap";
 import loginImg from "../../assets/loginIMG.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useForm } from "react-hook-form";
 // Styles
 import "./Login.Styles.scss";
 import Alerts from "../../components/Alerts/Alerts";
