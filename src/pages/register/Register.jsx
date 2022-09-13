@@ -3,7 +3,6 @@ import { Container, Row, Col, Alert } from "react-bootstrap";
 import signUp from "../../assets/signup.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useForm } from "react-hook-form";
 import "./register.Styles.scss";
 const Register = () => {
   const RenderRegister = () => {
@@ -11,7 +10,8 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [alert, setAlert] = useState();
-
+    const [errorEmail, setErrorEmail] = useState("");
+    const [errorPass, setErrorPass] = useState("");
     const handleChangeEmail = (e) => {
       setEmail(e.target.value);
     };
@@ -23,10 +23,33 @@ const Register = () => {
       setPasswordConfirm(e.target.value);
     };
 
-    // const handleSubmit = (e) => {
-    //   e.preventDefault();
-    //   postRegister();
-    // };
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      const emailTest = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+        email
+      );
+      if (!emailTest) {
+        setErrorEmail("Email invalido");
+        return;
+      } else {
+        setErrorEmail("");
+      }
+      const passTest = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(password);
+      if (!passTest) {
+        setErrorPass("Contraseña invalida");
+        return;
+      } else {
+        setErrorPass("");
+      }
+      if (password !== passwordConfirm) {
+        setErrorPass("Las contraseñas no coinciden");
+        return;
+      } else {
+        setErrorPass("");
+      }
+
+      postRegister();
+    };
 
     const endpoint =
       "https://api-rest-full-deliveries.herokuapp.com/users?register=true&suffix=user";
@@ -50,63 +73,72 @@ const Register = () => {
       setAlert(null);
     };
 
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm();
-    const onSubmit = () => {
-      postRegister();
-    };
-
     return (
       <Col className="d-flex flex-column justify-content-center align-items-center">
         <h3 className="title-login">Registro</h3>
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit}
           className="d-flex flex-column justify-content-center align-items-center"
         >
           <input
-            {...register("email", { required: true })}
             placeholder="Correo electronico"
             className="form-control mb-3"
             name="email_user"
             onChange={handleChangeEmail}
           />
-          {errors.email && (
-            <span className="text-danger" style={{ marginTop: "-1rem" }}>
-              El email es requerido
+
+          {errorEmail && (
+            <span
+              style={{
+                color: "red",
+                marginTop: "-.5rem",
+                marginBottom: ".5rem",
+              }}
+            >
+              {" "}
+              {errorEmail}{" "}
             </span>
           )}
 
           <input
-            {...register("password", { required: true })}
             type="password"
             placeholder="Contraseña"
             className="form-control mb-3"
             name="password_user"
             onChange={handleChangePassword}
           />
-          {errors.password && (
-            <span className="text-danger" style={{ marginTop: "-1rem" }}>
-              La contraseña es requerida
+          {errorPass && (
+            <span
+              style={{
+                color: "red",
+                marginTop: "-.5rem",
+                marginBottom: ".5rem",
+              }}
+            >
+              {" "}
+              {errorPass}{" "}
             </span>
           )}
-
           <input
-            {...register("password", { required: true })}
             type="password"
             placeholder="Confirmar Contraseña"
             className="form-control mb-3"
             name="password_user"
             onChange={handleChangePasswordConfirm}
           />
-          {errors.password && (
-            <span className="text-danger" style={{ marginTop: "-1rem" }}>
-              La contraseña es requerida
+
+          {errorPass && (
+            <span
+              style={{
+                color: "red",
+                marginTop: "-.5rem",
+                marginBottom: ".5rem",
+              }}
+            >
+              {" "}
+              {errorPass}{" "}
             </span>
           )}
-
           <input
             type="submit"
             value="Registrar"
@@ -114,7 +146,17 @@ const Register = () => {
             disabled={!(password === passwordConfirm)}
           />
           {password !== passwordConfirm ? (
-            <p className="match-pass"> Las contaseñas deben ser iguales </p>
+            <p
+              className="match-pass"
+              style={{
+                color: "red",
+                marginTop: "-.5rem",
+                marginBottom: ".5rem",
+              }}
+            >
+              {" "}
+              Las contaseñas deben ser iguales{" "}
+            </p>
           ) : null}
         </form>
         <div className="d-flex flex-row justify-content-center text-contain">

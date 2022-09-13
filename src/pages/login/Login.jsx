@@ -15,7 +15,6 @@ const Login = () => {
   const [response, setResponse] = useState();
   const [alert, setSetAlert] = useState();
   const [error, setError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
   const token = localStorage.getItem("token");
   let navigate = useNavigate();
   const onChangeEmail = (e) => {
@@ -31,7 +30,6 @@ const Login = () => {
     const emailTest = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
       email
     );
-    const passTest = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(password);
 
     if (!emailTest) {
       setError("Email invalido");
