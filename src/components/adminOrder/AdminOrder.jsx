@@ -9,6 +9,7 @@ const AdminOrder = ({
   packagingDate,
   translateDate,
   shippingDate,
+  numProductOrder,
   active,
 }) => {
   const [deliveryChange, setDeliveryChange] = useState();
@@ -20,6 +21,7 @@ const AdminOrder = ({
   const [error, setError] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [errorDelete, setErrorDelete] = useState(false);
+  const [numberProduct, setNumberProduct] = useState();
   const headers = {
     Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
   };
@@ -39,6 +41,11 @@ const AdminOrder = ({
     setActiveChange(e.target.value);
   };
 
+  const onNumberChange = (e) => {
+    setNumberProduct(e.target.value);
+  };
+  console.log(numberProduct);
+
   const onUpdate = () => {
     const data = new FormData();
     deliveryChange != undefined
@@ -56,9 +63,11 @@ const AdminOrder = ({
     activeChange != undefined
       ? data.append("active_order", activeChange)
       : data.append("active_order", active);
+    numProductOrder != undefined
+      ? data.append("num_product_order", numberProduct)
+      : data.append("num_product_order", numProductOrder);
     const token = localStorage.getItem("token");
     const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&token=${token}&tableToken=users&suffixToken=user`;
-    console.log(data.length);
     axios
       .put(endpoint, data, { headers })
       .then((res) => {
@@ -103,6 +112,20 @@ const AdminOrder = ({
                   name="order_date_order"
                   type="date"
                   onChange={onDeliveryChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col className="mx-2">
+              <Form.Group className="d-flex flex-column justify-content-around align-items-center">
+                <Form.Label className="title-status">
+                  Número de productos
+                </Form.Label>
+                <span className="title-pre">{numProductOrder} Productos</span>
+                <Form.Control
+                  name="num_product_order"
+                  type="number"
+                  placeholder="Número de productos"
+                  onChange={onNumberChange}
                 />
               </Form.Group>
             </Col>
