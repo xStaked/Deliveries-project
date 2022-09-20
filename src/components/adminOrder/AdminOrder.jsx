@@ -44,7 +44,6 @@ const AdminOrder = ({
   const onNumberChange = (e) => {
     setNumberProduct(e.target.value);
   };
-  console.log(numberProduct);
 
   const onUpdate = () => {
     const data = new FormData();
@@ -72,12 +71,13 @@ const AdminOrder = ({
       .put(endpoint, data, { headers })
       .then((res) => {
         setShow(true);
-        console.error("Update success");
       })
       .catch((err) => {
         setError(true);
-        console.log(err);
       });
+    setTimeout(() => {
+      setError(false);
+    }, 2000);
     setShow(false);
   };
   const onDelete = () => {
@@ -94,6 +94,9 @@ const AdminOrder = ({
       .catch((err) => {
         setErrorDelete(true);
       });
+    setTimeout(() => {
+      setErrorDelete(false);
+    }, 2000);
     setErrorDelete(false);
   };
   return (
@@ -112,6 +115,7 @@ const AdminOrder = ({
                   name="order_date_order"
                   type="date"
                   onChange={onDeliveryChange}
+                  disabled={active == 0}
                 />
               </Form.Group>
             </Col>
@@ -126,6 +130,7 @@ const AdminOrder = ({
                   type="number"
                   placeholder="Número de productos"
                   onChange={onNumberChange}
+                  disabled={active == 0}
                 />
               </Form.Group>
             </Col>
@@ -140,6 +145,7 @@ const AdminOrder = ({
                   type="number"
                   placeholder="Días"
                   onChange={onPackingChange}
+                  disabled={active == 0}
                 />
               </Form.Group>
             </Col>
@@ -154,6 +160,7 @@ const AdminOrder = ({
                   type="number"
                   placeholder="Días"
                   onChange={onTranslateChange}
+                  disabled={active == 0}
                 />
               </Form.Group>
             </Col>
@@ -168,6 +175,7 @@ const AdminOrder = ({
                   type="number"
                   placeholder="Días"
                   onChange={onShippingChange}
+                  disabled={active == 0}
                 />
               </Form.Group>
             </Col>
@@ -175,9 +183,14 @@ const AdminOrder = ({
               <Form.Group className="d-flex flex-column justify-content-around align-items-center">
                 <Form.Label className="title-status">Entregado</Form.Label>
                 <span className="title-pre">
-                  {active == 0 ? `NO Entregado` : "Entregado"}{" "}
+                  {active == 1 ? (
+                    <span style={{ color: "red" }}>NO Entregado</span>
+                  ) : (
+                    "Entregado"
+                  )}{" "}
                 </span>
-                <Form.Control
+                {/* <Form.Control
+                  type="hidden"
                   as="select"
                   name="active_order"
                   defaultValue={active != 0 ? "1" : "0"}
@@ -185,20 +198,25 @@ const AdminOrder = ({
                 >
                   <option value="1">Si</option>
                   <option value="0">No</option>
-                </Form.Control>
+                </Form.Control> */}
               </Form.Group>
             </Col>
           </Form>
         </div>
         <Col className="d-flex flex-column justify-content-evenly align-items-center mx-3">
-          <Button className="my-2" onClick={onUpdate}>
-            {" "}
-            Editar{" "}
-          </Button>
-          <Button variant="danger" onClick={onDelete} className="my-2">
-            {" "}
-            Eliminar{" "}
-          </Button>
+          {active == 1 && (
+            <Button className="my-2" onClick={onUpdate}>
+              {" "}
+              Editar{" "}
+            </Button>
+          )}
+          {active == 1 && (
+            <Button variant="success" onClick={onDelete} className="my-2">
+              {" "}
+              Entregado{" "}
+            </Button>
+          )}
+
           {show && <Alert variant="success"> Actualización exitosa </Alert>}
           {error && (
             <Alert variant="danger">
