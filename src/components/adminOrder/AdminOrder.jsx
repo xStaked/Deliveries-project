@@ -115,7 +115,7 @@ const AdminOrder = ({
                   name="order_date_order"
                   type="date"
                   onChange={onDeliveryChange}
-                  disabled={active == 0}
+                  disabled={active == 0}  
                 />
               </Form.Group>
             </Col>
