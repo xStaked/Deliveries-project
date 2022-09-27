@@ -52,7 +52,7 @@ const Register = () => {
     };
 
     const endpoint =
-      "https://api-rest-full-deliveries.herokuapp.com/users?register=true&suffix=user";
+      "https://api-electricosdelvalle.herokuapp.com/users?register=true&suffix=user";
 
     const headers = {
       Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",

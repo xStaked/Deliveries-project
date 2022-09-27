@@ -66,7 +66,7 @@ const AdminOrder = ({
       ? data.append("num_product_order", numberProduct)
       : data.append("num_product_order", numProductOrder);
     const token = localStorage.getItem("token");
-    const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&token=${token}&tableToken=users&suffixToken=user`;
+    const endpoint = `https://api-electricosdelvalle.herokuapp.com/orders?id=${id_order}&nameId=id_order&token=${token}&tableToken=users&suffixToken=user`;
     axios
       .put(endpoint, data, { headers })
       .then((res) => {
@@ -84,7 +84,7 @@ const AdminOrder = ({
     const token = localStorage.getItem("token");
     axios
       .delete(
-        `https://api-rest-full-deliveries.herokuapp.com/orders?id=${id_order}&nameId=id_order&suffix=order&desactive=true&token=${token}&tableToken=users&suffixToken=user`,
+        `https://api-electricosdelvalle.herokuapp.com/orders?id=${id_order}&nameId=id_order&suffix=order&desactive=true&token=${token}&tableToken=users&suffixToken=user`,
         { headers }
       )
       .then((res) => {
@@ -115,7 +115,7 @@ const AdminOrder = ({
                   name="order_date_order"
                   type="date"
                   onChange={onDeliveryChange}
-                  disabled={active == 0}  
+                  disabled={active == 0}
                 />
               </Form.Group>
             </Col>

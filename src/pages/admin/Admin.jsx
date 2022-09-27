@@ -36,7 +36,7 @@ const Admin = () => {
     setEmail(e.target.value);
   };
 
-  const endpoint = `https://api-rest-full-deliveries.herokuapp.com/relations?select=id_order,tracking_order,id_user_order,num_product_order,email_user,id_product_order,name_product,image_product,order_date_order,packing_time_order,transportation_time_order,delivery_time_order,active_order&rel=orders,products,users&type=order,product,user&linkTo=date_create_order&betweenIn=2022-08-01&betweenOut=2022-08-30&orderBy=id_order&orderMode=asc&startAt=0&endAt=10&filterTo=email_user&inTo='${
+  const endpoint = `https://api-electricosdelvalle.herokuapp.com/relations?select=id_order,tracking_order,id_user_order,num_product_order,email_user,id_product_order,name_product,order_date_order,packing_time_order,transportation_time_order,delivery_time_order,active_order&rel=orders,products,users&type=order,product,user&linkTo=date_create_order&betweenIn=2022-08-01&betweenOut=2022-08-30&orderBy=id_order&orderMode=asc&startAt=0&endAt=10&filterTo=email_user&inTo='${
     email ? email : ""
   }'`;
 
@@ -131,7 +131,7 @@ function CreateOrder(props) {
     Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
   };
   let token = localStorage.getItem("token");
-  const endpoint = `https://api-rest-full-deliveries.herokuapp.com/orders?token=${token}&tableToken=users&suffixToken=user`;
+  const endpoint = `https://api-electricosdelvalle.herokuapp.com/orders?token=${token}&tableToken=users&suffixToken=user`;
 
   const onClick = () => {
     const data = new FormData();
