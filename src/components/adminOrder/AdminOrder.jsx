@@ -11,8 +11,9 @@ const AdminOrder = ({
   shippingDate,
   numProductOrder,
   active,
+  delivered,
 }) => {
-  const [deliveryChange, setDeliveryChange] = useState();
+  const [date, setDate] = useState();
   const [packingChange, setPackingChange] = useState();
   const [translateChange, setTranslateChange] = useState();
   const [shippingChange, setShippingChange] = useState();
@@ -22,11 +23,12 @@ const AdminOrder = ({
   const [showDelete, setShowDelete] = useState(false);
   const [errorDelete, setErrorDelete] = useState(false);
   const [numberProduct, setNumberProduct] = useState();
+  const [delerivedChange, setDelerivedChange] = useState();
   const headers = {
     Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
   };
-  const onDeliveryChange = (e) => {
-    setDeliveryChange(e.target.value);
+  const onDateChange = (e) => {
+    setDate(e.target.value);
   };
   const onPackingChange = (e) => {
     setPackingChange(e.target.value);
@@ -41,14 +43,18 @@ const AdminOrder = ({
     setActiveChange(e.target.value);
   };
 
+  const onDeliveryChange = (e) => {
+    setDelerivedChange(e.target.value);
+  };
+
   const onNumberChange = (e) => {
     setNumberProduct(e.target.value);
   };
 
   const onUpdate = () => {
     const data = new FormData();
-    deliveryChange != undefined
-      ? data.append("order_date_order", deliveryChange)
+    date != undefined
+      ? data.append("order_date_order", date)
       : data.append("order_date_order", deliveryDate);
     packingChange != undefined
       ? data.append("packing_time_order", packingChange)
@@ -59,9 +65,9 @@ const AdminOrder = ({
     shippingChange != undefined
       ? data.append("delivery_time_order", shippingChange)
       : data.append("delivery_time_order", shippingDate);
-    activeChange != undefined
-      ? data.append("active_order", activeChange)
-      : data.append("active_order", active);
+    delerivedChange != undefined
+      ? data.append("delivered_order", delerivedChange)
+      : data.append("delivered_order", delivered);
     numProductOrder != undefined
       ? data.append("num_product_order", numberProduct)
       : data.append("num_product_order", numProductOrder);
@@ -114,8 +120,8 @@ const AdminOrder = ({
                 <Form.Control
                   name="order_date_order"
                   type="date"
-                  onChange={onDeliveryChange}
-                  disabled={active == 0}
+                  onChange={onDateChange}
+                  disabled={delivered == 0}
                 />
               </Form.Group>
             </Col>
@@ -130,7 +136,7 @@ const AdminOrder = ({
                   type="number"
                   placeholder="Número de productos"
                   onChange={onNumberChange}
-                  disabled={active == 0}
+                  disabled={delivered == 0}
                 />
               </Form.Group>
             </Col>
@@ -145,7 +151,7 @@ const AdminOrder = ({
                   type="number"
                   placeholder="Días"
                   onChange={onPackingChange}
-                  disabled={active == 0}
+                  disabled={delivered == 0}
                 />
               </Form.Group>
             </Col>
@@ -160,7 +166,7 @@ const AdminOrder = ({
                   type="number"
                   placeholder="Días"
                   onChange={onTranslateChange}
-                  disabled={active == 0}
+                  disabled={delivered == 0}
                 />
               </Form.Group>
             </Col>
@@ -175,7 +181,7 @@ const AdminOrder = ({
                   type="number"
                   placeholder="Días"
                   onChange={onShippingChange}
-                  disabled={active == 0}
+                  disabled={delivered == 0}
                 />
               </Form.Group>
             </Col>
@@ -183,7 +189,7 @@ const AdminOrder = ({
               <Form.Group className="d-flex flex-column justify-content-around align-items-center">
                 <Form.Label className="title-status">Entregado</Form.Label>
                 <span className="title-pre">
-                  {active == 1 ? (
+                  {delivered == 1 ? (
                     <span style={{ color: "red" }}>NO Entregado</span>
                   ) : (
                     "Entregado"
@@ -192,9 +198,9 @@ const AdminOrder = ({
                 <Form.Control
                   type="hidden"
                   as="select"
-                  name="active_order"
-                  defaultValue={active != 0 ? "1" : "0"}
-                  onChange={onActiveChange}
+                  name="delivered_order"
+                  defaultValue={delivered != 0 ? "1" : "0"}
+                  onChange={onDeliveryChange}
                 >
                   <option value="0">Si</option>
                   <option value="1">No</option>
@@ -204,13 +210,13 @@ const AdminOrder = ({
           </Form>
         </div>
         <Col className="d-flex flex-column justify-content-evenly align-items-center mx-3">
-          {active == 1 && (
+          {delivered == 1 && (
             <Button className="my-2" onClick={onUpdate}>
               {" "}
               Editar{" "}
             </Button>
           )}
-          {active == 1 && (
+          {active == 1 && delivered == 0 && (
             <Button variant="danger" onClick={onDelete} className="my-2">
               {" "}
               Eliminar{" "}

@@ -36,9 +36,12 @@ const Admin = () => {
     setEmail(e.target.value);
   };
 
-  const endpoint = `https://api-electricosdelvalle.herokuapp.com/relations?select=id_order,tracking_order,id_user_order,num_product_order,email_user,id_product_order,name_product,order_date_order,packing_time_order,transportation_time_order,delivery_time_order,active_order&rel=orders,products,users&type=order,product,user&linkTo=date_create_order&betweenIn=2022-08-01&betweenOut=2022-08-30&orderBy=id_order&orderMode=asc&startAt=0&endAt=10&filterTo=email_user&inTo='${
+  const endpoint = `https://api-electricosdelvalle.herokuapp.com/relations?select=id_order,tracking_order,id_user_order,num_product_order,email_user,id_product_order,name_product,order_date_order,packing_time_order,transportation_time_order,delivery_time_order,delivered_order,active_order&rel=orders,products,users&type=order,product,user&linkTo=date_create_order&betweenIn=2022-08-01&betweenOut=2022-08-30&orderBy=id_order&orderMode=asc&startAt=0&endAt=10&filterTo=email_user&inTo='${
     email ? email : ""
   }'`;
+
+  let dataFiltered = [...data];
+  dataFiltered = dataFiltered.filter((item) => item.active_order === 1);
 
   const headers = {
     Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
@@ -96,8 +99,8 @@ const Admin = () => {
             </Alert>
           ) : null}
         </Col>
-        {data &&
-          data.map((item) => {
+        {dataFiltered &&
+          dataFiltered.map((item) => {
             return (
               <AdminOrder
                 productName={item.name_product}
@@ -107,6 +110,7 @@ const Admin = () => {
                 shippingDate={item.delivery_time_order}
                 numProductOrder={item.num_product_order}
                 active={item.active_order}
+                delivered={item.delivered_order}
                 id_order={item.id_order}
               />
             );
@@ -121,6 +125,8 @@ export default Admin;
 
 function CreateOrder(props) {
   const [createOrder, setCreateOrder] = useState({});
+  const [users, setUsers] = useState([]);
+  const [products, setProducts] = useState([]);
   const { setErrorCreate } = props;
 
   const handleChange = (e) => {
@@ -146,7 +152,6 @@ function CreateOrder(props) {
       createOrder.transportation_time_order
     );
     data.append("delivery_time_order", createOrder.delivery_time_order);
-    data.append("active_order", createOrder.active_order);
     //post
     axios
       .post(endpoint, data, { headers })
@@ -161,6 +166,29 @@ function CreateOrder(props) {
       });
     setErrorCreate(false);
   };
+
+  useEffect(() => {
+    const endpoint = `https://api-electricosdelvalle.herokuapp.com/users`;
+    axios
+      .get(endpoint, { headers })
+      .then((res) => {
+        return setUsers(res.data.response);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+
+    const endpointProducts = `https://api-electricosdelvalle.herokuapp.com/products`;
+
+    axios
+      .get(endpointProducts, { headers })
+      .then((res) => {
+        return setProducts(res.data.response);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  }, []);
 
   return (
     <Modal
@@ -183,11 +211,40 @@ function CreateOrder(props) {
           </Form.Group>
           <Form.Group>
             <Form.Label>Id se usuario</Form.Label>
-            <Form.Control name="id_user_order" type="number" required />
+            <Form.Control
+              as="select"
+              name="id_user_order"
+              defaultValue={0}
+              required
+            >
+              <option value={0} disabled>
+                {" "}
+              </option>
+              {users.map((item, ind) => (
+                <option value={item.id_user} key={ind}>
+                  {" "}
+                  {item.frist_name_user} {"->"} {item.email_user}
+                </option>
+              ))}
+            </Form.Control>
           </Form.Group>
           <Form.Group>
-            <Form.Label>Id del producto a enviar</Form.Label>
-            <Form.Control name="id_product_order" type="number" required />
+            <Form.Label>Producto a enviar</Form.Label>
+            <Form.Control
+              as="select"
+              name="id_product_order"
+              defaultValue={0}
+              required
+            >
+              <option value={0} disabled>
+                {" "}
+              </option>
+              {products.map((item, ind) => (
+                <option value={item.id_product} key={ind}>
+                  {item.name_product}
+                </option>
+              ))}
+            </Form.Control>
           </Form.Group>
           <Form.Group>
             <Form.Label>Número de productos</Form.Label>
@@ -214,16 +271,6 @@ function CreateOrder(props) {
             <Form.Control name="delivery_time_order" type="number" required />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Entregado</Form.Label>
-            <Form.Control
-              as="select"
-              name="active_order"
-              defaultValue={0}
-              required
-            >
-              <option value={1}>Si</option>
-              <option value={0}>No</option>
-            </Form.Control>
             <Button type="submit" variant="success" className="my-1">
               <span onClick={onClick}>Crear Orden</span>
             </Button>
