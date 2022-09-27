@@ -189,16 +189,16 @@ const AdminOrder = ({
                     "Entregado"
                   )}{" "}
                 </span>
-                {/* <Form.Control
+                <Form.Control
                   type="hidden"
                   as="select"
                   name="active_order"
                   defaultValue={active != 0 ? "1" : "0"}
                   onChange={onActiveChange}
                 >
-                  <option value="1">Si</option>
-                  <option value="0">No</option>
-                </Form.Control> */}
+                  <option value="0">Si</option>
+                  <option value="1">No</option>
+                </Form.Control>
               </Form.Group>
             </Col>
           </Form>
@@ -211,9 +211,9 @@ const AdminOrder = ({
             </Button>
           )}
           {active == 1 && (
-            <Button variant="success" onClick={onDelete} className="my-2">
+            <Button variant="danger" onClick={onDelete} className="my-2">
               {" "}
-              Entregado{" "}
+              Eliminar{" "}
             </Button>
           )}
 
