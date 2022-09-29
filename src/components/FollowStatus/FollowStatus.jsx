@@ -19,18 +19,6 @@ const FollowStatus = ({
       <div className="card-status">
         <Row className="d-flex flex-column justify-content-center align-items-center">
           <h5 className="product-name mx-2 text-center"> {productName} </h5>
-          <a
-            href={imgProduct}
-            target="_blank"
-          >
-            <img
-              src={imgProduct}
-              alt="imgproduct"
-              width={60}
-              height={60}
-              className="img-product text-center mx-4"
-            />
-          </a>
         </Row>
         <Col className="d-flex flex-column justify-content-center align-items-center">
           <FaHouseUser className="icon-status" />
