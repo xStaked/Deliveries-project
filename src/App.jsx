@@ -10,6 +10,7 @@ import Register from "./pages/register/Register";
 import FollowProduct from "./pages/followProduct/FollowProduct";
 import Admin from "./pages/admin/Admin";
 import Error from "./pages/404/Error";
+import CreateOrder from "./pages/CreateOrder/CreateOrder";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -26,15 +27,20 @@ const App = () => {
             <Route path="/contacto" exact element={<Contact />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/register" exact element={<Register />} />
-            <Route path="/admin" exact element={ 
-             token && idRol == 4 ? <Admin /> : <Navigate replace to="/" /> 
-            } />
+            <Route
+              path="/admin"
+              exact
+              element={
+                token && idRol == 4 ? <Admin /> : <Navigate replace to="/" />
+              }
+            />
             <Route
               path="/followProduct"
               element={
                 !token ? <Navigate replace to="/login" /> : <FollowProduct />
               }
             />
+            <Route path="/admin/create" exact element={ token && idRol == 4 ? <CreateOrder /> : <Navigate replace to="/" /> } />
             <Route path="*" element={<Error />} />
           </Routes>
         </NavbarComponent>
