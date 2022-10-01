@@ -35,14 +35,17 @@ const CreateOrder = () => {
     axios
       .post(endpoint, data, { headers })
       .then((res) => {
-        console.log(res);
-        localStorage.setItem("res", createOrder);
+        setCreateOrder({});
+        navigate("/admin");
       })
       .catch((err) => {
         console.log(err);
-        localStorage.setItem("err", createOrder);
       });
-    setErrorCreate(false);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    onClick();
   };
 
   useEffect(() => {
@@ -68,6 +71,8 @@ const CreateOrder = () => {
       });
   }, []);
 
+  console.log(createOrder);
+
   return (
     <Container
       fluid
@@ -86,6 +91,7 @@ const CreateOrder = () => {
         <Col className="d-flex justify-content-center">
           <Form
             onChange={handleChange}
+            onSubmit={onSubmit}
             className="d-flex flex-row flex-wrap  justify-content-evenly align-items-center"
           >
             <Form.Group className="mx-2" style={{ width: "550px" }}>
@@ -103,12 +109,13 @@ const CreateOrder = () => {
                 <option value={0} disabled>
                   {" "}
                 </option>
-                { users && users.map((item, ind) => (
-                  <option value={item.id_user} key={ind}>
-                    {" "}
-                    {item.first_name_user} {"->"} {item.email_user}
-                  </option>
-                ))}
+                {users &&
+                  users.map((item, ind) => (
+                    <option value={item.id_user} key={ind}>
+                      {" "}
+                      {item.first_name_user} {"->"} {item.email_user}
+                    </option>
+                  ))}
               </Form.Control>
             </Form.Group>
             <Form.Group className="mx-2" style={{ width: "550px" }}>
@@ -124,11 +131,12 @@ const CreateOrder = () => {
                 <option value={0} disabled>
                   {" "}
                 </option>
-                { products &&  products.map((item, ind) => (
-                  <option value={item.id_product} key={ind}>
-                    {item.name_product}
-                  </option>
-                ))}
+                {products &&
+                  products.map((item, ind) => (
+                    <option value={item.id_product} key={ind}>
+                      {item.name_product}
+                    </option>
+                  ))}
               </Form.Control>
             </Form.Group>
             <Form.Group className="mx-2" style={{ width: "550px" }}>
@@ -176,7 +184,7 @@ const CreateOrder = () => {
                 className="my-4"
                 style={{ width: "350px" }}
               >
-                <span onClick={onClick}>Crear Orden</span>
+                <span>Crear Orden</span>
               </Button>
             </Form.Group>
           </Form>
