@@ -1,24 +1,23 @@
 @import "../../styles/variables";
 
 .container-follow {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;    
-    background-color: $background;
-    .follow-title {
-        color: $blue;
-        text-align: center;
-    }
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $background;
+  .follow-title {
+    color: $blue;
+    text-align: center;
+  }
 
-    .text-dev {
-        color: $gray;
-    }
+  .text-dev {
+    color: $gray;
+  }
 }
 
 @media (max-width: 768px) {
-    .container-follow {
-       height: 100% !important;
-    }
+  .container-follow {
+    height: 100% !important;
+  }
 }

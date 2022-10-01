@@ -38,7 +38,7 @@ const FollowProduct = () => {
   dataFilter = data.filter((item) => item.active_order === 1);
 
   return (
-    <Container className="container-follow">
+    <Container className="container-follow" style={{height:'100%'}} >
       <Row>
         <Col>
           <h2 className="follow-title my-4">Estado total del envío</h2>
