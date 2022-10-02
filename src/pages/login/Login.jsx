@@ -68,6 +68,8 @@ const Login = () => {
       localStorage.setItem("id_rol", response?.response[0].id_rol_user);
       if (response.response[0].id_rol_user == 4) {
         navigate("/admin");
+      } else {
+        window.location.reload();
       }
       window.location.reload();
     } else {
