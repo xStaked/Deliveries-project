@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import "./CreateOrder.Styles.scss";
 
@@ -7,6 +8,7 @@ const CreateOrder = () => {
   const [createOrder, setCreateOrder] = useState({});
   const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setCreateOrder({ ...createOrder, [e.target.name]: e.target.value });
@@ -30,6 +32,7 @@ const CreateOrder = () => {
       "transportation_time_order",
       createOrder.transportation_time_order
     );
+
     data.append("delivery_time_order", createOrder.delivery_time_order);
     //post
     axios

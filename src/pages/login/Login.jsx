@@ -63,9 +63,9 @@ const Login = () => {
 
   useEffect(() => {
     if (response) {
-      localStorage.setItem("token", response.response[0].token_user);
-      localStorage.setItem("id", response.response[0].id_user);
-      localStorage.setItem("id_rol", response.response[0].id_rol_user);
+      localStorage.setItem("token", response?.response[0].token_user);
+      localStorage.setItem("id", response?.response[0].id_user);
+      localStorage.setItem("id_rol", response?.response[0].id_rol_user);
       if (response.response[0].id_rol_user == 4) {
         navigate("/admin");
       }

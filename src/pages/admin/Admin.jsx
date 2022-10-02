@@ -6,7 +6,6 @@ import {
   Form,
   Button,
   InputGroup,
-  Modal,
   Alert,
 } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
@@ -27,16 +26,12 @@ const Admin = () => {
   }, [width]);
 
   const onChange = (e) => {
-    setEmail(e?.target?.value);
+    setEmail(e.target.value);
   };
 
-  const endpoint = `https://api-electricosdelvalle.herokuapp.com/relations?select=id_order,tracking_order,id_user_order,id_product_order,name_product,order_date_order,packing_time_order,transportation_time_order,delivery_time_order,delivered_order,active_order&rel=orders,products,users&type=order,product,user&linkTo=date_create_order&betweenIn=2022-08-01&betweenOut=2060-08-30&orderBy=id_order&orderMode=asc&startAt=0&endAt=27&filterTo=email_user&inTo="${
+  const endpoint = `https://api-electricosdelvalle.herokuapp.com/relations?select=id_order,tracking_order,id_user_order,id_product_order,name_product,order_date_order,num_product_order,packing_time_order,transportation_time_order,delivery_time_order,delivered_order,active_order&rel=orders,products,users&type=order,product,user&linkTo=date_create_order&betweenIn=2022-08-01&betweenOut=2060-08-30&orderBy=id_order&orderMode=asc&startAt=0&endAt=27&filterTo=email_user&inTo="${
     email && email
   }"`;
-
-
-  let dataFiltered = [...data];
-  dataFiltered = dataFiltered.filter((item) => item.active_order === 1);
 
   const headers = {
     Authorization: "+a#nWVm.v=zCg&C7B[pfL)ehJt*L8D",
@@ -52,14 +47,16 @@ const Admin = () => {
       })
       .catch(() => {
         setError(true);
+        setData([]);
         setErrorCreate(true);
       });
   };
 
+  // console.log(data[0].num_product_order);
   return (
     <Container
       className="container-Admin"
-      style={data.length > 0 ? { height: "100%" } : { border: "0" }}
+      style={data?.length > 0 ? { height: "100%" } : { border: "0" }}
     >
       <Row className="d-flex flex-column justify-content-center align-items-center admin">
         <Col xl={6}>
@@ -88,22 +85,25 @@ const Admin = () => {
             </Alert>
           ) : null}
         </Col>
-        {dataFiltered &&
-          dataFiltered.map((item) => {
-            return (
-              <AdminOrder
-                productName={item.name_product}
-                deliveryDate={item.order_date_order}
-                packagingDate={item.packing_time_order}
-                translateDate={item.transportation_time_order}
-                shippingDate={item.delivery_time_order}
-                numProductOrder={item.num_product_order}
-                active={item.active_order}
-                delivered={item.delivered_order}
-                id_order={item.id_order}
-              />
-            );
-          })}
+        {data &&
+          data
+            .filter((item) => item.active_order === 1)
+            .map((item, ind) => {
+              return (
+                <AdminOrder
+                  key={ind}
+                  productName={item.name_product}
+                  deliveryDate={item.order_date_order}
+                  packagingDate={item.packing_time_order}
+                  translateDate={item.transportation_time_order}
+                  shippingDate={item.delivery_time_order}
+                  numProductOrder={item.num_product_order}
+                  active={item.active_order}
+                  delivered={item.delivered_order}
+                  id_order={item.id_order}
+                />
+              );
+            })}
       </Row>
       {errorCreate && <Alert variant="danger" />}
     </Container>

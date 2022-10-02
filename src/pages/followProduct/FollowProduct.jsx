@@ -29,12 +29,8 @@ const FollowProduct = () => {
     setShowAlert(false);
   }, []);
 
-  let dataFilter = [...data];
-
-  dataFilter = data.filter((item) => item.active_order === 1);
-
   return (
-    <Container className="container-follow" style={{height:'100%'}} >
+    <Container className="container-follow" style={{ height: "100%" }}>
       <Row>
         <Col>
           <h2 className="follow-title my-4">Estado total del envío</h2>
@@ -45,19 +41,21 @@ const FollowProduct = () => {
           No se encontraron resultados
         </Alert>
       )}
-      {dataFilter ? (
-        dataFilter.map((item) => {
-          return (
-            <FollowStatus
-              key={item.id_order}
-              deliveryDate={item.order_date_order}
-              packagingDate={item.packing_time_order}
-              translateDate={item.transportation_time_order}
-              shippingDate={item.delivery_time_order}
-              productName={item.name_product}
-            />
-          );
-        })
+      {data ? (
+        data
+          .filter((item) => item.active_order === 1)
+          .map((item) => {
+            return (
+              <FollowStatus
+                key={item.id_order}
+                deliveryDate={item.order_date_order}
+                packagingDate={item.packing_time_order}
+                translateDate={item.transportation_time_order}
+                shippingDate={item.delivery_time_order}
+                productName={item.name_product}
+              />
+            );
+          })
       ) : (
         <h2 className="text-dev">El usuario no cuenta con ninguna orden</h2>
       )}
