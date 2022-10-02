@@ -71,8 +71,6 @@ const CreateOrder = () => {
       });
   }, []);
 
-  console.log(createOrder);
-
   return (
     <Container
       fluid

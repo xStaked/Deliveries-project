@@ -27,14 +27,13 @@ const Admin = () => {
   }, [width]);
 
   const onChange = (e) => {
-    setEmail(e.target.value);
+    setEmail(e?.target?.value);
   };
 
   const endpoint = `https://api-electricosdelvalle.herokuapp.com/relations?select=id_order,tracking_order,id_user_order,id_product_order,name_product,order_date_order,packing_time_order,transportation_time_order,delivery_time_order,delivered_order,active_order&rel=orders,products,users&type=order,product,user&linkTo=date_create_order&betweenIn=2022-08-01&betweenOut=2060-08-30&orderBy=id_order&orderMode=asc&startAt=0&endAt=27&filterTo=email_user&inTo="${
     email && email
   }"`;
 
-  console.log(data);
 
   let dataFiltered = [...data];
   dataFiltered = dataFiltered.filter((item) => item.active_order === 1);
@@ -56,8 +55,6 @@ const Admin = () => {
         setErrorCreate(true);
       });
   };
-
-  console.log(error);
 
   return (
     <Container
