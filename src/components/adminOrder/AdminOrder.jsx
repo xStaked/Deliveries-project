@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { Col, Form, Button, Alert } from "react-bootstrap";
 import "./admin.Styles.scss";
@@ -17,7 +18,6 @@ const AdminOrder = ({
   const [packingChange, setPackingChange] = useState();
   const [translateChange, setTranslateChange] = useState();
   const [shippingChange, setShippingChange] = useState();
-  const [activeChange, setActiveChange] = useState();
   const [show, setShow] = useState(false);
   const [error, setError] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -39,10 +39,6 @@ const AdminOrder = ({
   const onShippingChange = (e) => {
     setShippingChange(e.target.value);
   };
-  const onActiveChange = (e) => {
-    setActiveChange(e.target.value);
-  };
-
   const onDeliveryChange = (e) => {
     setDelerivedChange(e.target.value);
   };
@@ -75,10 +71,10 @@ const AdminOrder = ({
     const endpoint = `https://api-electricosdelvalle.herokuapp.com/orders?id=${id_order}&nameId=id_order&token=${token}&tableToken=users&suffixToken=user`;
     axios
       .put(endpoint, data, { headers })
-      .then((res) => {
+      .then(() => {
         setShow(true);
       })
-      .catch((err) => {
+      .catch(() => {
         setError(true);
       });
     setTimeout(() => {
@@ -93,11 +89,11 @@ const AdminOrder = ({
         `https://api-electricosdelvalle.herokuapp.com/orders?id=${id_order}&nameId=id_order&suffix=order&desactive=true&token=${token}&tableToken=users&suffixToken=user`,
         { headers }
       )
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        setShowDelete(true);
         setErrorDelete(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setErrorDelete(true);
       });
     setTimeout(() => {

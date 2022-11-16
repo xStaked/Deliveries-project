@@ -32,12 +32,11 @@ const CreateOrder = () => {
       "transportation_time_order",
       createOrder.transportation_time_order
     );
-
     data.append("delivery_time_order", createOrder.delivery_time_order);
-    //post
+    data.append("active_order", 1);
     axios
       .post(endpoint, data, { headers })
-      .then((res) => {
+      .then(() => {
         setCreateOrder({});
         navigate("/admin");
       })
@@ -53,6 +52,7 @@ const CreateOrder = () => {
 
   useEffect(() => {
     const endpoint = `https://api-electricosdelvalle.herokuapp.com/users`;
+    const endpointProducts = `https://api-electricosdelvalle.herokuapp.com/products`;
     axios
       .get(endpoint, { headers })
       .then((res) => {
@@ -61,9 +61,6 @@ const CreateOrder = () => {
       .catch((err) => {
         console.warn(err);
       });
-
-    const endpointProducts = `https://api-electricosdelvalle.herokuapp.com/products`;
-
     axios
       .get(endpointProducts, { headers })
       .then((res) => {

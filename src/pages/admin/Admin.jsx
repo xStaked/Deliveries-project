@@ -54,7 +54,7 @@ const Admin = () => {
     }
   };
 
-  console.log(email);
+  console.log(data);
   return (
     <Container
       className="container-Admin"
