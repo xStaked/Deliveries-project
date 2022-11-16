@@ -75,7 +75,6 @@ const Login = () => {
     }
   }, [response]);
 
-  // JSX code for login form
   const renderForm = (
     <>
       {!token ? (
@@ -87,7 +86,7 @@ const Login = () => {
               className="d-flex flex-column justify-content-center align-items-center"
             >
               <input
-                // type="email"
+                type="email"
                 placeholder="Correo electronico"
                 className="form-control mb-3"
                 name="email_user"
