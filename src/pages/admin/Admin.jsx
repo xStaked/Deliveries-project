@@ -18,7 +18,6 @@ const Admin = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [width, setWidth] = useState();
-  const [errorCreate, setErrorCreate] = useState(false);
   useEffect(() => {
     window.addEventListener("resize", () => {
       setWidth(window.innerWidth);
@@ -38,21 +37,24 @@ const Admin = () => {
   };
 
   const api = () => {
-    setData([]);
-    axios
-      .get(endpoint, { headers })
-      .then((res) => {
-        setData(res.data.response);
-        setError(false);
-      })
-      .catch(() => {
-        setError(true);
-        setData([]);
-        setErrorCreate(true);
-      });
+    if (email?.length > 0) {
+      setData([]);
+      axios
+        .get(endpoint, { headers })
+        .then((res) => {
+          setData(res.data.response);
+          setError(false);
+        })
+        .catch(() => {
+          setError(true);
+          setData([]);
+        });
+    } else {
+      return false;
+    }
   };
 
-  console.log(data);
+  console.log(email);
   return (
     <Container
       className="container-Admin"
@@ -70,11 +72,13 @@ const Admin = () => {
               onChange={onChange}
               className="mx-4"
             />
-            <BsSearch
-              onClick={api}
-              style={{ color: "fff", borderRadius: "6px" }}
-              className="search-icon"
-            />
+            <button style={{ background: "none", border: "none" }}>
+              <BsSearch
+                onClick={api}
+                style={{ color: "fff", borderRadius: "6px" }}
+                className="search-icon"
+              />
+            </button>
             <Link to="/admin/create">
               <Button variant="success">Crear</Button>
             </Link>
