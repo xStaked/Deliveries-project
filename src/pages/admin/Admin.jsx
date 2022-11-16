@@ -52,11 +52,11 @@ const Admin = () => {
       });
   };
 
-  // console.log(data[0].num_product_order);
+  console.log(data);
   return (
     <Container
       className="container-Admin"
-      style={data?.length > 0 ? { height: "100%" } : { border: "0" }}
+      style={data?.length > 0 ? { height: "100vh" } : {}}
     >
       <Row className="d-flex flex-column justify-content-center align-items-center admin">
         <Col xl={6}>
@@ -105,7 +105,6 @@ const Admin = () => {
               );
             })}
       </Row>
-      {errorCreate && <Alert variant="danger" />}
     </Container>
   );
 };

@@ -72,8 +72,6 @@ const Login = () => {
         window.location.reload();
       }
       window.location.reload();
-    } else {
-      console.error("No hay respuesta");
     }
   }, [response]);
 
