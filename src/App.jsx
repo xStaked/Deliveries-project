@@ -19,7 +19,7 @@ const App = () => {
 
   return (
     <>
-      <Row xxl={12} xl={12}>
+      <Row xxl={12} xl={12} style={{height:'100vh'}} >
         <NavbarComponent>
           <Routes>
             <Route path="/" exact element={<Home />} />
