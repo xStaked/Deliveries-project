@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Container,
   Row,
@@ -17,12 +17,6 @@ const Admin = () => {
   const [email, setEmail] = useState("");
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
-  const [width, setWidth] = useState();
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      setWidth(window.innerWidth);
-    });
-  }, [width]);
 
   const onChange = (e) => {
     setEmail(e.target.value);
@@ -53,8 +47,6 @@ const Admin = () => {
       return false;
     }
   };
-
-  console.log(data);
   return (
     <Container
       className="container-Admin"

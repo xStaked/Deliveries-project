@@ -25,7 +25,7 @@ const Register = () => {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      const emailTest = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+      const emailTest = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/.test(
         email
       );
       if (!emailTest) {
@@ -64,10 +64,10 @@ const Register = () => {
       data.append("password_user", password);
       axios
         .post(endpoint, data, { headers })
-        .then((res) => {
+        .then(() => {
           setAlert(true);
         })
-        .catch((err) => {
+        .catch(() => {
           setAlert(false);
         });
       setAlert(null);
