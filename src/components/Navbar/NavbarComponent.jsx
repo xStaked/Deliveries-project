@@ -81,7 +81,7 @@ const NavbarComponent = ({ children }) => {
                 <Nav>
                   <Link
                     to="followProduct"
-                    className="shipping my-2 text-center"
+                    className="shipping my-2 text-center d-flex justify-content-center align-items-center"
                   >
                     <TbTruckDelivery className="shipping-icon" />
                     <span className="shipping-text mx-1">
