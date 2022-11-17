@@ -1,8 +1,8 @@
 @import "../../styles/variables";
 
-.container-Admin {
-  background-color: $background;
-  height: 100vh;
+.container-Admin, body {
+  background-color: $background !important;
+  height: auto;
   .title {
     color: $blue;
     text-align: center;

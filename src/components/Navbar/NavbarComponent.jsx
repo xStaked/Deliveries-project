@@ -5,12 +5,12 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { TbTruckDelivery } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
-import logo from "../../assets/logo.png";
 // Styles
 import "./Navbar.Styles.scss";
 import { useEffect } from "react";
 import { useState } from "react";
 
+// eslint-disable-next-line react/prop-types
 const NavbarComponent = ({ children }) => {
   const [token, setToken] = useState();
 
@@ -28,7 +28,6 @@ const NavbarComponent = ({ children }) => {
 
   return (
     <>
-      {/* <NavLogin children={children} removeToken={removeToken} /> */}
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
           <Navbar.Brand>
@@ -39,25 +38,11 @@ const NavbarComponent = ({ children }) => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="nosotros">
-                {/* <Link to="nosotros" className="link"> */}
-                  Nosotros
-                {/* </Link> */}
-              </Nav.Link>
-              <Nav.Link href="contacto">
-                {/* <Link to={"contacto"} className="link"> */}
-                  Contactanos
-                {/* </Link> */}
-              </Nav.Link>
+              <Nav.Link href="nosotros">Nosotros</Nav.Link>
+              <Nav.Link href="contacto">Contactanos</Nav.Link>
             </Nav>
-            {/* <Nav>
-              <Nav.Link>
-                {" "}
-                <img src={'src/assets/output-onlinepngtools.png'} alt="logo" width={200} height={110} />{" "}
-              </Nav.Link>
-            </Nav> */}
             {token ? (
-              <Nav className="d-flex flex-column justify-content-center align-items-center">
+              <Nav className="custom-navbar-elements">
                 <Nav>
                   <Link
                     to="followProduct"
@@ -81,20 +66,16 @@ const NavbarComponent = ({ children }) => {
                 </Nav>
               </Nav>
             ) : (
-              <Nav className="d-flex flex-column justify-content-center align-items-center">
+              <Nav className="custom-navbar-elements">
                 <Nav>
                   <Nav.Link className="login text-center mx-2" href="login">
                     {" "}
                     <BsFillArrowRightCircleFill className="login-icon mx-1" />{" "}
-                    {/* <Link to="login" className="link"> */}
-                      <span className="text-login">Login</span>
-                    {/* </Link> */}
+                    <span className="text-login">Login</span>
                   </Nav.Link>
                   <Nav.Link className="register text-center" href="register">
                     <BsFillArrowLeftCircleFill className="register-icon mx-1" />
-                    {/* <Link to="register"> */}
-                      <span className="register-text">Register</span>
-                    {/* </Link> */}
+                    <span className="register-text">Register</span>
                   </Nav.Link>
                 </Nav>
                 <Nav>
@@ -119,4 +100,3 @@ const NavbarComponent = ({ children }) => {
 };
 
 export default NavbarComponent;
-

@@ -1,5 +1,4 @@
 import React from "react";
-import { Row } from "react-bootstrap";
 import Home from "./pages/Home/Home";
 import { Routes, Route, Navigate } from "react-router-dom";
 import About from "./pages/about/About";
@@ -19,7 +18,7 @@ const App = () => {
 
   return (
     <>
-      <Row xxl={12} xl={12} style={{height:'100vh'}} >
+      <div className="container-admin">
         <NavbarComponent>
           <Routes>
             <Route path="/" exact element={<Home />} />
@@ -40,11 +39,21 @@ const App = () => {
                 !token ? <Navigate replace to="/login" /> : <FollowProduct />
               }
             />
-            <Route path="/admin/create" exact element={ token && idRol == 4 ? <CreateOrder /> : <Navigate replace to="/" /> } />
+            <Route
+              path="/admin/create"
+              exact
+              element={
+                token && idRol == 4 ? (
+                  <CreateOrder />
+                ) : (
+                  <Navigate replace to="/" />
+                )
+              }
+            />
             <Route path="*" element={<Error />} />
           </Routes>
         </NavbarComponent>
-      </Row>
+      </div>
     </>
   );
 };

@@ -50,7 +50,7 @@ const Admin = () => {
   return (
     <Container
       className="container-Admin"
-      style={data?.length > 0 ? { height: "100vh" } : {}}
+      // style={data?.length > 0 ? { height: "100vh" } : {}}
     >
       <Row className="d-flex flex-column justify-content-center align-items-center admin">
         <Col xl={6}>
