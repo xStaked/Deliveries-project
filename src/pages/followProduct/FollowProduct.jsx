@@ -30,7 +30,7 @@ const FollowProduct = () => {
   }, []);
 
   return (
-    <Container className="container-follow" style={{ height: "100%" }}>
+    <Container className="container-follow">
       <Row>
         <Col>
           <h2 className="follow-title my-4">Estado total del envío</h2>
