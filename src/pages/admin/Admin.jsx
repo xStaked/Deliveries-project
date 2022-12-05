@@ -22,7 +22,7 @@ const Admin = () => {
     setEmail(e.target.value);
   };
 
-  const endpoint = `https://api-electricosdelvalle.herokuapp.com/relations?select=id_order,tracking_order,id_user_order,id_product_order,name_product,order_date_order,num_product_order,packing_time_order,transportation_time_order,delivery_time_order,delivered_order,active_order&rel=orders,products,users&type=order,product,user&linkTo=date_create_order&betweenIn=2022-08-01&betweenOut=2060-08-30&orderBy=id_order&orderMode=asc&startAt=0&endAt=27&filterTo=email_user&inTo="${
+  const endpoint = `https://api-electricosdelvalle.herokuapp.com/relations?select=id_order,tracking_order,id_user_order,id_product_order,name_product,order_date_order,num_product_order,packing_time_order,transportation_time_order,delivery_time_order,delivered_order,active_order&rel=orders,products,users&type=order,product,user&linkTo=date_create_order&betweenIn=2022-08-01&betweenOut=2022-12-30&orderBy=id_order&orderMode=asc&startAt=0&endAt=200&filterTo=email_user&inTo="${
     email && email
   }"`;
 
