@@ -17,7 +17,7 @@ const FollowProduct = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api-electricosdelvalle.herokuapp.com/relations?select=id_order,tracking_order,id_user_order,id_product_order,name_product,order_date_order,packing_time_order,transportation_time_order,delivery_time_order,delivered_order,active_order&rel=orders,products,users&type=order,product,user&linkTo=date_create_order&betweenIn=2022-08-01&betweenOut=2060-08-30&orderBy=id_order&orderMode=asc&startAt=0&endAt=27&filterTo=id_user_order&inTo=${idUser}`,
+        `https://api-electricosdelvalle.herokuapp.com/relations?select=id_order,tracking_order,id_user_order,id_product_order,name_product,order_date_order,packing_time_order,transportation_time_order,delivery_time_order,delivered_order,active_order&rel=orders,products,users&type=order,product,user&linkTo=date_create_order&betweenIn=2022-08-01&betweenOut=2022-12-30&orderBy=id_order&orderMode=asc&startAt=0&endAt=200&filterTo=id_user_order&inTo=${idUser}`,
         { headers }
       )
       .then((res) => {
